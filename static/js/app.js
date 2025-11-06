@@ -271,12 +271,147 @@ function displayMetadataResults(data) {
     const container = document.getElementById('tab-metadata');
     const metadata = data.metadata || {};
 
-    container.innerHTML = `
+    // Categorize metadata
+    const categories = categorizeMetadata(metadata);
+
+    let html = '';
+
+    // Display each category
+    for (const [categoryName, fields] of Object.entries(categories)) {
+        if (fields.length === 0) continue;
+
+        const icons = {
+            'File Information': '📄',
+            'Image Properties': '🖼️',
+            'Camera Settings': '📷',
+            'GPS Location': '📍',
+            'Date & Time': '🕐',
+            'Software & Tools': '💻',
+            'Other Metadata': '🏷️'
+        };
+
+        html += `
+            <div class="result-item metadata-category">
+                <h3>${icons[categoryName] || '📋'} ${categoryName}</h3>
+                <div class="metadata-grid">
+                    ${fields.map(([key, value]) => `
+                        <div class="metadata-field">
+                            <div class="metadata-key">${formatMetadataKey(key)}</div>
+                            <div class="metadata-value">${formatMetadataValue(key, value)}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // Add raw JSON at the end for advanced users
+    html += `
         <div class="result-item">
-            <h3>Metadata</h3>
-            <pre>${JSON.stringify(metadata, null, 2)}</pre>
+            <details>
+                <summary style="cursor: pointer; color: var(--primary-color); font-weight: bold;">
+                    🔧 View Raw Metadata (JSON)
+                </summary>
+                <pre style="margin-top: 1rem; max-height: 500px; overflow-y: auto;">${JSON.stringify(metadata, null, 2)}</pre>
+            </details>
         </div>
     `;
+
+    container.innerHTML = html || '<div class="result-item"><p>No metadata found</p></div>';
+}
+
+// Categorize metadata into logical groups
+function categorizeMetadata(metadata) {
+    const categories = {
+        'File Information': [],
+        'Image Properties': [],
+        'Camera Settings': [],
+        'GPS Location': [],
+        'Date & Time': [],
+        'Software & Tools': [],
+        'Other Metadata': []
+    };
+
+    const categoryRules = {
+        'File Information': ['FileName', 'FileSize', 'FileType', 'MIMEType', 'FileModifyDate'],
+        'Image Properties': ['ImageWidth', 'ImageHeight', 'ImageSize', 'BitDepth', 'ColorSpace', 'ColorType', 'Compression', 'Format', 'Width', 'Height', 'Megapixels'],
+        'Camera Settings': ['Make', 'Model', 'LensModel', 'ISO', 'FNumber', 'ExposureTime', 'ShutterSpeed', 'FocalLength', 'Flash', 'WhiteBalance', 'MeteringMode', 'ExposureMode', 'Aperture'],
+        'GPS Location': ['GPSLatitude', 'GPSLongitude', 'GPSAltitude', 'GPSPosition', 'GPSDateTime', 'GPSLatitudeRef', 'GPSLongitudeRef'],
+        'Date & Time': ['CreateDate', 'ModifyDate', 'DateTimeOriginal', 'DateTime', 'TimeStamp'],
+        'Software & Tools': ['Software', 'Creator', 'ProcessingSoftware', 'HostComputer', 'Artist', 'Copyright', 'UserComment']
+    };
+
+    for (const [key, value] of Object.entries(metadata)) {
+        let categorized = false;
+
+        for (const [category, keywords] of Object.entries(categoryRules)) {
+            if (keywords.some(keyword => key.includes(keyword))) {
+                categories[category].push([key, value]);
+                categorized = true;
+                break;
+            }
+        }
+
+        if (!categorized) {
+            categories['Other Metadata'].push([key, value]);
+        }
+    }
+
+    return categories;
+}
+
+// Format metadata key for display
+function formatMetadataKey(key) {
+    // Add spaces before capital letters and remove special chars
+    return key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, str => str.toUpperCase())
+        .trim();
+}
+
+// Format metadata value for display
+function formatMetadataValue(key, value) {
+    if (value === null || value === undefined || value === '') {
+        return '<span style="color: var(--text-muted); font-style: italic;">N/A</span>';
+    }
+
+    // Convert to string
+    let strValue = String(value);
+
+    // Format file sizes
+    if (key.toLowerCase().includes('filesize') || key.toLowerCase().includes('size')) {
+        const match = strValue.match(/(\d+)/);
+        if (match) {
+            const bytes = parseInt(match[1]);
+            return formatFileSize(bytes) + ` <span style="color: var(--text-muted); font-size: 0.85em;">(${strValue})</span>`;
+        }
+    }
+
+    // Highlight GPS coordinates
+    if (key.toLowerCase().includes('gps') && (key.includes('Latitude') || key.includes('Longitude'))) {
+        return `<span style="color: var(--success-color); font-weight: bold;">${strValue}</span>`;
+    }
+
+    // Format dates
+    if (key.toLowerCase().includes('date') || key.toLowerCase().includes('time')) {
+        return `<span style="color: var(--warning-color);">${strValue}</span>`;
+    }
+
+    // Limit length for very long values
+    if (strValue.length > 100) {
+        return strValue.substring(0, 100) + '... <span style="color: var(--text-muted); font-style: italic;">(truncated)</span>';
+    }
+
+    return strValue;
+}
+
+// Format file size in human-readable format
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 }
 
 // Display Strings Results

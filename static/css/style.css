@@ -326,6 +326,66 @@ header h1 {
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
+/* Metadata Display */
+.metadata-category {
+    margin-bottom: 1.5rem;
+}
+
+.metadata-category h3 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.metadata-field {
+    background: var(--darker-bg);
+    padding: 0.75rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.metadata-field:hover {
+    border-left-color: var(--primary-color);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.metadata-key {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.metadata-value {
+    color: var(--text-color);
+    font-size: 1rem;
+    word-break: break-word;
+    font-family: 'Courier New', monospace;
+}
+
+.metadata-value code {
+    background: var(--dark-bg);
+    padding: 0.125rem 0.375rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* GPS and Important Values Highlight */
+.metadata-field:has(.metadata-key:contains("GPS")) {
+    border-left-color: var(--success-color);
+}
+
 /* Actions */
 .actions {
     text-align: center;
