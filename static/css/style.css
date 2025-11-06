@@ -241,6 +241,13 @@ header h1 {
     padding: 0.5rem;
     border-radius: 8px;
     text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.image-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .image-item img {
@@ -248,11 +255,32 @@ header h1 {
     height: auto;
     border-radius: 4px;
     margin-bottom: 0.5rem;
+    background: #000;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.image-item img:hover {
+    transform: scale(1.05);
 }
 
 .image-item p {
     font-size: 0.85rem;
     color: var(--text-muted);
+}
+
+/* LSB Channel Styles */
+.lsb-channel-section {
+    margin-bottom: 2rem;
+}
+
+.channel-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
 }
 
 /* Actions */

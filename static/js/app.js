@@ -182,24 +182,65 @@ function displayResults(data) {
 // Display LSB Results
 function displayLSBResults(data) {
     const container = document.getElementById('tab-lsb');
+
+    // Group by channel
+    const channels = { R: [], G: [], B: [] };
+    data.bit_planes.forEach(bp => {
+        channels[bp.channel].push(bp);
+    });
+
+    let channelsHTML = '';
+    for (const [channel, planes] of Object.entries(channels)) {
+        const channelColor = channel === 'R' ? '#ff0000' : channel === 'G' ? '#00ff00' : '#0000ff';
+        channelsHTML += `
+            <div class="result-item">
+                <h3 style="color: ${channelColor}">${channel} Channel - Colored Bit Planes</h3>
+                <div class="image-grid">
+                    ${planes.map(bp => `
+                        <div class="image-item" style="border: 2px solid ${channelColor}">
+                            <img src="/api/download/${currentAnalysisId}/${bp.filename}"
+                                 alt="${bp.channel}${bp.bit}"
+                                 title="Bit ${bp.bit} of ${bp.channel} channel">
+                            <p style="color: ${channelColor}; font-weight: bold;">${bp.channel} Bit ${bp.bit}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // Add composite views
+    let compositesHTML = '';
+    if (data.composite_planes && data.composite_planes.length > 0) {
+        compositesHTML = `
+            <div class="result-item">
+                <h3 style="background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    RGB Composite Bit Planes
+                </h3>
+                <p>Combined RGB channels for each bit plane</p>
+                <div class="image-grid">
+                    ${data.composite_planes.map(cp => `
+                        <div class="image-item" style="border: 2px solid #6366f1">
+                            <img src="/api/download/${currentAnalysisId}/${cp.filename}"
+                                 alt="Composite Bit ${cp.bit}"
+                                 title="RGB Composite of Bit ${cp.bit}">
+                            <p style="color: #6366f1; font-weight: bold;">Composite Bit ${cp.bit}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
     container.innerHTML = `
         <div class="result-item">
-            <h3>Image Information</h3>
-            <p>Dimensions: ${data.width} x ${data.height}</p>
-            <p>Mode: ${data.mode}</p>
+            <h3>📊 Image Information</h3>
+            <p><strong>Dimensions:</strong> ${data.width} x ${data.height} pixels</p>
+            <p><strong>Color Mode:</strong> ${data.mode}</p>
+            <p><strong>Total Bit Planes Generated:</strong> ${data.bit_planes.length} colored + ${data.composite_planes ? data.composite_planes.length : 0} composites</p>
         </div>
-        <div class="result-item">
-            <h3>Bit Plane Analysis</h3>
-            <p>Generated ${data.bit_planes.length} bit plane images</p>
-            <div class="image-grid">
-                ${data.bit_planes.map(bp => `
-                    <div class="image-item">
-                        <img src="/api/download/${currentAnalysisId}/${bp.filename}" alt="${bp.channel}${bp.bit}">
-                        <p>${bp.channel}${bp.bit}</p>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
+        ${compositesHTML}
+        ${channelsHTML}
     `;
 }
 
