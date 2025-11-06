@@ -248,14 +248,29 @@ function displayReverseSearchResults(data) {
     const searchEngines = data.search_engines;
 
     let html = `
-        <div class="result-item">
-            <h3><i class="fas fa-search"></i> Reverse Image Search</h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                Search for this image across multiple search engines to find similar images, sources, or more information.
+        <div class="result-item" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--info-color) 100%); border: none; color: white;">
+            <h3 style="color: white;"><i class="fas fa-info-circle"></i> Important Notice</h3>
+            <p style="color: white; opacity: 0.95; margin-bottom: 0;">
+                ${data.note}
             </p>
         </div>
 
-        <div class="reverse-search-grid">
+        <div class="result-item">
+            <h3><i class="fas fa-download"></i> Step 1: Download the Image</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                First, download the analyzed image to your computer:
+            </p>
+            <a href="${data.download_url}" class="btn btn-primary" download style="display: inline-flex; text-decoration: none;">
+                <i class="fas fa-download"></i> Download Image
+            </a>
+        </div>
+
+        <div class="result-item">
+            <h3><i class="fas fa-search"></i> Step 2: Choose a Search Engine</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                Click on a search engine below, then follow the instructions to upload your downloaded image:
+            </p>
+            <div class="reverse-search-grid">
     `;
 
     for (const [key, engine] of Object.entries(searchEngines)) {
@@ -264,53 +279,44 @@ function displayReverseSearchResults(data) {
             <a href="${engine.url}" target="_blank" rel="noopener noreferrer" class="reverse-search-card" style="--engine-color: ${color}">
                 <div class="reverse-search-icon">${engine.icon}</div>
                 <div class="reverse-search-name">${engine.name}</div>
-                <div class="reverse-search-action">
-                    <i class="fas fa-arrow-right"></i> Search Now
+                <div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-top: 0.5rem;">
+                    ${engine.instructions}
+                </div>
+                <div class="reverse-search-action" style="margin-top: 0.75rem;">
+                    <i class="fas fa-external-link-alt"></i> Open ${engine.name}
                 </div>
             </a>
         `;
     }
 
     html += `
+            </div>
         </div>
 
-        <div class="result-item" style="margin-top: 1.5rem;">
-            <details>
-                <summary style="cursor: pointer; color: var(--primary-color); font-weight: bold;">
-                    <i class="fas fa-link"></i> Direct Image URL
-                </summary>
-                <div style="margin-top: 1rem;">
-                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
-                        Use this URL to search on other platforms:
-                    </p>
-                    <input
-                        type="text"
-                        value="${data.image_url}"
-                        readonly
-                        onclick="this.select()"
-                        style="width: 100%; padding: 0.75rem; background: var(--darker-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-family: monospace;"
-                    />
-                    <button
-                        onclick="navigator.clipboard.writeText('${data.image_url}'); this.innerHTML='<i class=\\'fas fa-check\\'></i> Copied!'; setTimeout(() => this.innerHTML='<i class=\\'fas fa-copy\\'></i> Copy URL', 2000)"
-                        class="btn btn-secondary"
-                        style="margin-top: 0.5rem;"
-                    >
-                        <i class="fas fa-copy"></i> Copy URL
-                    </button>
-                </div>
-            </details>
+        <div class="result-item" style="border-left: 3px solid var(--info-color);">
+            <h4 style="color: var(--info-color); margin-bottom: 0.75rem;">
+                <i class="fas fa-question-circle"></i> How to Perform Reverse Image Search
+            </h4>
+            <ol style="margin-left: 1.5rem; color: var(--text-muted); line-height: 1.8;">
+                <li><strong>Download</strong> the image using the button above</li>
+                <li><strong>Click</strong> on your preferred search engine</li>
+                <li><strong>Look for</strong> the camera icon or upload button on the search engine's page</li>
+                <li><strong>Upload</strong> your downloaded image</li>
+                <li><strong>Review</strong> the search results</li>
+            </ol>
         </div>
 
-        <div class="result-item" style="margin-top: 1rem; background: var(--darker-bg); border-left: 3px solid var(--warning-color);">
-            <h4 style="color: var(--warning-color); margin-bottom: 0.5rem;">
+        <div class="result-item" style="background: var(--darker-bg); border-left: 3px solid var(--success-color);">
+            <h4 style="color: var(--success-color); margin-bottom: 0.5rem;">
                 <i class="fas fa-lightbulb"></i> Tips for Best Results
             </h4>
             <ul style="margin-left: 1.5rem; color: var(--text-muted);">
-                <li>Try multiple search engines for comprehensive results</li>
-                <li>Google and Yandex usually have the largest image databases</li>
-                <li>TinEye specializes in tracking image modifications and sources</li>
-                <li>Bing can find visually similar images effectively</li>
-                <li>Some engines may require the image to be publicly accessible</li>
+                <li><strong>Google Images</strong> - Best for general image search and similar images</li>
+                <li><strong>Yandex</strong> - Excellent for face recognition and Eastern European content</li>
+                <li><strong>TinEye</strong> - Specializes in tracking image modifications, edits, and original sources</li>
+                <li><strong>Bing</strong> - Good alternative with unique results</li>
+                <li><strong>Sogou</strong> - Best for Chinese and Asian content</li>
+                <li>Try multiple engines for comprehensive results</li>
             </ul>
         </div>
     `;

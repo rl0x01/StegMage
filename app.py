@@ -179,50 +179,71 @@ def serve_image(analysis_id):
     return jsonify({'error': 'Image not found'}), 404
 
 
+@app.route('/api/download-image/<analysis_id>', methods=['GET'])
+def download_image(analysis_id):
+    """Download the uploaded image"""
+    upload_dir = app.config['UPLOAD_FOLDER']
+
+    # Look for files starting with analysis_id
+    for filename in os.listdir(upload_dir):
+        if filename.startswith(analysis_id):
+            filepath = os.path.join(upload_dir, filename)
+            # Get original extension
+            ext = os.path.splitext(filename)[1] or '.jpg'
+            return send_file(filepath, as_attachment=True, download_name=f'stegmage_image{ext}')
+
+    return jsonify({'error': 'Image not found'}), 404
+
+
 @app.route('/api/reverse-search/<analysis_id>', methods=['GET'])
 def get_reverse_search_urls(analysis_id):
     """Generate reverse image search URLs for various search engines"""
-    # Get the base URL (from request or environment)
-    base_url = request.url_root.rstrip('/')
-    image_url = f"{base_url}/api/image/{analysis_id}"
+    # Note: Local URLs don't work with reverse search engines
+    # We provide upload page URLs instead
 
-    # Generate URLs for different search engines
     search_urls = {
         'google': {
             'name': 'Google Images',
-            'url': f"https://www.google.com/searchbyimage?image_url={image_url}",
+            'url': 'https://images.google.com/imghp',
+            'upload_url': 'https://lens.google.com/uploadbyurl',
             'icon': '<i class="fab fa-google"></i>',
-            'color': '#4285f4'
+            'color': '#4285f4',
+            'instructions': 'Click the camera icon, then upload your downloaded image'
         },
         'yandex': {
             'name': 'Yandex',
-            'url': f"https://yandex.com/images/search?rpt=imageview&url={image_url}",
+            'url': 'https://yandex.com/images/search?rpt=imageview',
             'icon': '<i class="fab fa-yandex"></i>',
-            'color': '#fc3f1d'
+            'color': '#fc3f1d',
+            'instructions': 'Click the camera icon, then upload your downloaded image'
         },
         'bing': {
             'name': 'Bing Images',
-            'url': f"https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIHMP&sbisrc=UrlPaste&q=imgurl:{image_url}",
+            'url': 'https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIIDP',
             'icon': '<i class="fab fa-microsoft"></i>',
-            'color': '#008373'
+            'color': '#008373',
+            'instructions': 'Click "Browse" to upload your downloaded image'
         },
         'tineye': {
             'name': 'TinEye',
-            'url': f"https://tineye.com/search?url={image_url}",
+            'url': 'https://tineye.com/',
             'icon': '<i class="fas fa-eye"></i>',
-            'color': '#d81159'
+            'color': '#d81159',
+            'instructions': 'Click the upload arrow, then select your downloaded image'
         },
         'sogou': {
             'name': 'Sogou',
-            'url': f"https://pic.sogou.com/ris?query={image_url}",
+            'url': 'https://pic.sogou.com/',
             'icon': '<i class="fas fa-search"></i>',
-            'color': '#fb6d3a'
+            'color': '#fb6d3a',
+            'instructions': 'Click the camera icon, then upload your downloaded image'
         }
     }
 
     return jsonify({
-        'image_url': image_url,
-        'search_engines': search_urls
+        'download_url': f'/api/download-image/{analysis_id}',
+        'search_engines': search_urls,
+        'note': 'Local images cannot be accessed by online search engines. Download the image first, then upload it to your preferred search engine.'
     })
 
 
