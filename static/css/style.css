@@ -163,6 +163,48 @@ header h1 {
     color: var(--text-muted);
 }
 
+/* Category Tabs */
+.category-tabs {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.category-btn:hover {
+    color: var(--text-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.category-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* Analysis Categories */
+.analysis-category {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.analysis-category.active {
+    display: block;
+}
+
 /* Tabs */
 .tabs {
     display: flex;

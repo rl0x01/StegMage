@@ -165,27 +165,25 @@ async function loadResults() {
 function displayResults(data) {
     const results = data.results;
 
+    // Create Dashboard
+    displayDashboard(results, data);
+
     // Load Reverse Image Search
     loadReverseSearchResults();
-
-    // LSB Analysis
-    if (results.lsb && results.lsb.success) {
-        displayLSBResults(results.lsb.data);
-    }
 
     // Metadata
     if (results.metadata && results.metadata.success) {
         displayMetadataResults(results.metadata.data);
     }
 
-    // Strings
-    if (results.strings && results.strings.success) {
-        displayStringsResults(results.strings.data);
+    // Color Analysis
+    if (results.color_analysis && results.color_analysis.success) {
+        displayColorAnalysisResults(results.color_analysis.data);
     }
 
-    // Zsteg
-    if (results.zsteg && results.zsteg.success) {
-        displayZstegResults(results.zsteg.data);
+    // LSB Analysis
+    if (results.lsb && results.lsb.success) {
+        displayLSBResults(results.lsb.data);
     }
 
     // Steghide
@@ -196,6 +194,26 @@ function displayResults(data) {
     // Outguess
     if (results.outguess && results.outguess.success) {
         displayOutguessResults(results.outguess.data);
+    }
+
+    // Zsteg
+    if (results.zsteg && results.zsteg.success) {
+        displayZstegResults(results.zsteg.data);
+    }
+
+    // Entropy
+    if (results.entropy && results.entropy.success) {
+        displayEntropyResults(results.entropy.data);
+    }
+
+    // Forensics
+    if (results.forensics && results.forensics.success) {
+        displayForensicsResults(results.forensics.data);
+    }
+
+    // Strings
+    if (results.strings && results.strings.success) {
+        displayStringsResults(results.strings.data);
     }
 
     // File Carving
@@ -671,17 +689,430 @@ function displayFileCarvingResults(data) {
     container.innerHTML = html || '<p>No embedded files found</p>';
 }
 
+// Display Dashboard
+function displayDashboard(results, data) {
+    const container = document.getElementById('tab-dashboard');
+
+    const findingsCount = {
+        steganography: 0,
+        forensics: 0,
+        metadata: 0,
+        other: 0
+    };
+
+    let findings = [];
+
+    // Check steghide
+    if (results.steghide?.success && results.steghide.data.attempts?.some(a => a.success)) {
+        findingsCount.steganography++;
+        findings.push({ type: 'success', icon: '🔐', title: 'Steghide Data Found', desc: 'Hidden data extracted with password' });
+    }
+
+    // Check outguess
+    if (results.outguess?.success && results.outguess.data.success) {
+        findingsCount.steganography++;
+        findings.push({ type: 'success', icon: '🔓', title: 'Outguess Data Found', desc: 'Hidden data detected' });
+    }
+
+    // Check zsteg
+    if (results.zsteg?.success && results.zsteg.data.findings?.length > 0) {
+        findingsCount.steganography++;
+        findings.push({ type: 'info', icon: '💎', title: 'Zsteg Findings', desc: `${results.zsteg.data.findings.length} potential findings` });
+    }
+
+    // Check entropy
+    if (results.entropy?.success && results.entropy.data.suspicious_blocks?.length > 0) {
+        findingsCount.forensics++;
+        findings.push({ type: 'warning', icon: '📊', title: 'Entropy Anomalies', desc: `${results.entropy.data.suspicious_blocks.length} suspicious blocks detected` });
+    }
+
+    // Check forensics
+    if (results.forensics?.success && results.forensics.data.ela_findings?.length > 0) {
+        findingsCount.forensics++;
+        findings.push({ type: 'warning', icon: '🔬', title: 'Manipulation Detected', desc: results.forensics.data.ela_findings.join(', ') });
+    }
+
+    // Check GPS
+    if (results.metadata?.success) {
+        const metadata = results.metadata.data.metadata || {};
+        if (Object.keys(metadata).some(k => k.toLowerCase().includes('gps'))) {
+            findingsCount.metadata++;
+            findings.push({ type: 'info', icon: '📍', title: 'GPS Data Found', desc: 'Location information in metadata' });
+        }
+    }
+
+    // Check file carving
+    if (results.file_carving?.success) {
+        const totalFiles = (results.file_carving.data.binwalk?.extracted_files?.length || 0) +
+                          (results.file_carving.data.foremost?.extracted_files?.length || 0);
+        if (totalFiles > 0) {
+            findingsCount.other++;
+            findings.push({ type: 'success', icon: '🗂️', title: 'Embedded Files Found', desc: `${totalFiles} files extracted` });
+        }
+    }
+
+    const totalFindings = findingsCount.steganography + findingsCount.forensics + findingsCount.metadata + findingsCount.other;
+
+    const summaryHTML = `
+        <div class="result-item" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-color) 100%); border: none; color: white;">
+            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">📊 Analysis Summary</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;">${totalFindings}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Total Findings</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.steganography}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Steganography</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.forensics}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Forensics</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.other}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Other</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const findingsHTML = findings.length > 0 ? `
+        <div class="result-item">
+            <h3>🔍 Key Findings</h3>
+            <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
+                ${findings.map(f => {
+                    const colors = {
+                        success: 'var(--success-color)',
+                        warning: 'var(--warning-color)',
+                        info: 'var(--primary-color)'
+                    };
+                    return `
+                        <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; border-left: 4px solid ${colors[f.type]};">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div style="font-size: 2rem;">${f.icon}</div>
+                                <div>
+                                    <div style="font-weight: bold; color: ${colors[f.type]};">${f.title}</div>
+                                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">${f.desc}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    ` : `
+        <div class="result-item">
+            <p style="color: var(--text-muted); text-align: center; padding: 2rem;">
+                ℹ️ No significant findings detected. Explore individual analysis tabs for detailed information.
+            </p>
+        </div>
+    `;
+
+    const analysesHTML = `
+        <div class="result-item">
+            <h3>📋 Analysis Methods Used</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 1rem;">
+                ${Object.entries(results).map(([name, result]) => {
+                    const icons = {
+                        lsb: '🔢',
+                        metadata: '📝',
+                        color_analysis: '🎨',
+                        steghide: '🔒',
+                        outguess: '🔓',
+                        zsteg: '💎',
+                        entropy: '📊',
+                        forensics: '🔬',
+                        strings: '📄',
+                        file_carving: '🗂️'
+                    };
+                    const status = result.success ? '✅' : '❌';
+                    return `
+                        <div style="background: var(--darker-bg); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.9rem;">
+                            ${status} ${icons[name] || '🔧'} ${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = summaryHTML + findingsHTML + analysesHTML;
+}
+
+// Display Color Analysis Results
+function displayColorAnalysisResults(data) {
+    const container = document.getElementById('tab-color');
+
+    let html = `
+        <div class="result-item">
+            <h3>🎨 Color Information</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">UNIQUE COLORS</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">${data.unique_colors?.toLocaleString() || 'N/A'}</div>
+                </div>
+                <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">COLOR DIVERSITY</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--success-color);">${(data.color_diversity * 100).toFixed(2)}%</div>
+                </div>
+                <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">DOMINANT COLORS</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--warning-color);">${data.dominant_colors?.length || 0}</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    if (data.palette_file) {
+        html += `
+            <div class="result-item">
+                <h3>🎨 Color Palette (Top 10)</h3>
+                <img src="/api/download/${currentAnalysisId}/${data.palette_file}"
+                     alt="Color Palette"
+                     style="width: 100%; max-width: 800px; border-radius: 8px; margin-top: 1rem;">
+            </div>
+        `;
+    }
+
+    if (data.histogram_files) {
+        html += `
+            <div class="result-item">
+                <h3>📊 Color Channel Histograms</h3>
+                <div class="image-grid">
+                    ${['r', 'g', 'b'].map(ch => {
+                        const file = data.histogram_files[`histogram_${ch}.png`];
+                        if (file) {
+                            const colors = { r: '#ff0000', g: '#00ff00', b: '#0000ff' };
+                            return `
+                                <div class="image-item" style="border: 2px solid ${colors[ch]}">
+                                    <img src="/api/download/${currentAnalysisId}/${file}" alt="${ch.toUpperCase()} Histogram">
+                                    <p style="color: ${colors[ch]}; font-weight: bold;">${ch.toUpperCase()} Channel</p>
+                                </div>
+                            `;
+                        }
+                        return '';
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    if (data.interpretation) {
+        html += `
+            <div class="result-item">
+                <h3>💡 Interpretation</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                    ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
+}
+
+// Display Entropy Results
+function displayEntropyResults(data) {
+    const container = document.getElementById('tab-entropy');
+
+    let html = `
+        <div class="result-item">
+            <h3>📊 Entropy Analysis</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
+                    <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">OVERALL ENTROPY</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">${data.overall_entropy?.toFixed(4) || 'N/A'}</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Max: 8.0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-item">
+            <h3>🎨 Channel Entropy</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                ${Object.entries(data.channel_entropy || {}).map(([channel, value]) => {
+                    const colors = { R: '#ff0000', G: '#00ff00', B: '#0000ff' };
+                    return `
+                        <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; border-left: 4px solid ${colors[channel]};">
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">${channel} Channel</div>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: ${colors[channel]};">${value?.toFixed(4)}</div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+
+    if (data.block_entropy) {
+        html += `
+            <div class="result-item">
+                <h3>🔲 Block-Based Entropy (8x8 blocks)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                    <div style="background: var(--darker-bg); padding: 0.75rem; border-radius: 8px;">
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">Average</div>
+                        <div style="font-weight: bold; color: var(--primary-color);">${data.block_entropy.average?.toFixed(4)}</div>
+                    </div>
+                    <div style="background: var(--darker-bg); padding: 0.75rem; border-radius: 8px;">
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">Min</div>
+                        <div style="font-weight: bold;">${data.block_entropy.min?.toFixed(4)}</div>
+                    </div>
+                    <div style="background: var(--darker-bg); padding: 0.75rem; border-radius: 8px;">
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">Max</div>
+                        <div style="font-weight: bold;">${data.block_entropy.max?.toFixed(4)}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    if (data.suspicious_blocks && data.suspicious_blocks.length > 0) {
+        html += `
+            <div class="result-item" style="border-left: 4px solid var(--warning-color);">
+                <h3 style="color: var(--warning-color);">⚠️ Suspicious Blocks Detected</h3>
+                <p>Found ${data.suspicious_blocks.length} blocks with unusually high entropy (>20% above average)</p>
+                <details style="margin-top: 1rem;">
+                    <summary style="cursor: pointer; color: var(--primary-color);">View block details</summary>
+                    <div style="max-height: 300px; overflow-y: auto; margin-top: 1rem;">
+                        ${data.suspicious_blocks.slice(0, 20).map(block => `
+                            <div style="background: var(--darker-bg); padding: 0.5rem; margin: 0.5rem 0; border-radius: 4px; font-size: 0.9rem;">
+                                Position: (${block.x}, ${block.y}) | Entropy: ${block.entropy?.toFixed(4)} | Diff: +${block.difference?.toFixed(4)}
+                            </div>
+                        `).join('')}
+                        ${data.suspicious_blocks.length > 20 ? `<p style="color: var(--text-muted); text-align: center; margin-top: 0.5rem;">... and ${data.suspicious_blocks.length - 20} more</p>` : ''}
+                    </div>
+                </details>
+            </div>
+        `;
+    }
+
+    if (data.entropy_map_file) {
+        html += `
+            <div class="result-item">
+                <h3>🗺️ Entropy Heatmap</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Brighter areas indicate higher entropy (more randomness/complexity)
+                </p>
+                <img src="/api/download/${currentAnalysisId}/${data.entropy_map_file}"
+                     alt="Entropy Map"
+                     style="width: 100%; max-width: 800px; border-radius: 8px; background: #000;">
+            </div>
+        `;
+    }
+
+    if (data.interpretation) {
+        html += `
+            <div class="result-item">
+                <h3>💡 Interpretation</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                    ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html;
+}
+
+// Display Forensics Results
+function displayForensicsResults(data) {
+    const container = document.getElementById('tab-forensics_ela');
+
+    let html = '';
+
+    if (data.ela_file) {
+        html += `
+            <div class="result-item">
+                <h3>🔍 Error Level Analysis (ELA)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    ELA highlights areas that have been modified or compressed at different quality levels.
+                    Bright areas may indicate manipulation.
+                </p>
+                <img src="/api/download/${currentAnalysisId}/${data.ela_file}"
+                     alt="ELA Analysis"
+                     style="width: 100%; max-width: 800px; border-radius: 8px; background: #000;">
+            </div>
+        `;
+    }
+
+    if (data.ela_findings && data.ela_findings.length > 0) {
+        html += `
+            <div class="result-item" style="border-left: 4px solid var(--warning-color);">
+                <h3 style="color: var(--warning-color);">⚠️ Findings</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                    ${data.ela_findings.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    if (data.compression_analysis) {
+        const ca = data.compression_analysis;
+        html += `
+            <div class="result-item">
+                <h3>📐 JPEG Compression Analysis</h3>
+                <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        ${ca.estimated_quality ? `
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">Estimated Quality</div>
+                                <div style="font-size: 1.3rem; font-weight: bold; color: var(--primary-color);">${ca.estimated_quality}</div>
+                            </div>
+                        ` : ''}
+                        ${ca.compression_artifacts ? `
+                            <div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">Compression Artifacts</div>
+                                <div style="font-size: 1.3rem; font-weight: bold; color: ${ca.compression_artifacts === 'High' ? 'var(--danger-color)' : 'var(--success-color)'};">${ca.compression_artifacts}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    ${ca.notes ? `<p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">${ca.notes}</p>` : ''}
+                </div>
+            </div>
+        `;
+    }
+
+    if (data.interpretation) {
+        html += `
+            <div class="result-item">
+                <h3>💡 Interpretation</h3>
+                <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                    ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    container.innerHTML = html || '<div class="result-item"><p>No forensic analysis data available</p></div>';
+}
+
+// Category Navigation
+document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+
+        // Update category buttons
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update category panes
+        document.querySelectorAll('.analysis-category').forEach(c => c.classList.remove('active'));
+        document.getElementById(`category-${category}`).classList.add('active');
+    });
+});
+
 // Tab Navigation
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const tab = btn.dataset.tab;
+        const parentCategory = btn.closest('.analysis-category');
 
-        // Update buttons
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // Update buttons within the same category
+        parentCategory.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Update panes
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        // Update panes within the same category
+        parentCategory.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
         document.getElementById(`tab-${tab}`).classList.add('active');
     });
 });
