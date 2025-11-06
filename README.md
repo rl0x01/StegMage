@@ -29,8 +29,10 @@ cd StegMage
 docker compose up -d
 
 # Access the platform
-open http://localhost:5000
+open http://localhost:8080
 ```
+
+> **Note pour macOS**: Le port 8080 est utilisé car le port 5000 est réservé par le service AirPlay d'Apple.
 
 ### Manual Installation
 

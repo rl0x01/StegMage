@@ -1,0 +1,23 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Thu Nov  6 16:22:38 2025
+Invocation: foremost -o results/f6a929c0-814a-41f4-ab88-375b313881af/foremost -i uploads/f6a929c0-814a-41f4-ab88-375b313881af_257582.png 
+Output directory: /app/results/f6a929c0-814a-41f4-ab88-375b313881af/foremost
+Configuration file: /etc/foremost.conf
+------------------------------------------------------------------
+File: uploads/f6a929c0-814a-41f4-ab88-375b313881af_257582.png
+Start: Thu Nov  6 16:22:38 2025
+Length: 18 KB (18605 bytes)
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+0:	00000000.png 	      18 KB 	          0 	  (75 x 75)
+Finish: Thu Nov  6 16:22:38 2025
+
+1 FILES EXTRACTED
+	
+png:= 1
+------------------------------------------------------------------
+
+Foremost finished at Thu Nov  6 16:22:38 2025
