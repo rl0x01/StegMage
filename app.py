@@ -191,27 +191,32 @@ def get_reverse_search_urls(analysis_id):
         'google': {
             'name': 'Google Images',
             'url': f"https://www.google.com/searchbyimage?image_url={image_url}",
-            'icon': '🔍'
+            'icon': '<i class="fab fa-google"></i>',
+            'color': '#4285f4'
         },
         'yandex': {
-            'name': 'Yandex Images',
+            'name': 'Yandex',
             'url': f"https://yandex.com/images/search?rpt=imageview&url={image_url}",
-            'icon': '🔎'
+            'icon': '<i class="fab fa-yandex"></i>',
+            'color': '#fc3f1d'
         },
         'bing': {
             'name': 'Bing Images',
             'url': f"https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIHMP&sbisrc=UrlPaste&q=imgurl:{image_url}",
-            'icon': '🔍'
+            'icon': '<i class="fab fa-microsoft"></i>',
+            'color': '#008373'
         },
         'tineye': {
             'name': 'TinEye',
             'url': f"https://tineye.com/search?url={image_url}",
-            'icon': '👁️'
+            'icon': '<i class="fas fa-eye"></i>',
+            'color': '#d81159'
         },
         'sogou': {
-            'name': 'Sogou Images',
+            'name': 'Sogou',
             'url': f"https://pic.sogou.com/ris?query={image_url}",
-            'icon': '🔍'
+            'icon': '<i class="fas fa-search"></i>',
+            'color': '#fb6d3a'
         }
     }
 

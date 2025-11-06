@@ -247,17 +247,9 @@ function displayReverseSearchResults(data) {
     const container = document.getElementById('tab-reverse');
     const searchEngines = data.search_engines;
 
-    const engineColors = {
-        'google': '#4285f4',
-        'yandex': '#fc3f1d',
-        'bing': '#008373',
-        'tineye': '#d81159',
-        'sogou': '#fb6d3a'
-    };
-
     let html = `
         <div class="result-item">
-            <h3>🔍 Reverse Image Search</h3>
+            <h3><i class="fas fa-search"></i> Reverse Image Search</h3>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
                 Search for this image across multiple search engines to find similar images, sources, or more information.
             </p>
@@ -267,13 +259,13 @@ function displayReverseSearchResults(data) {
     `;
 
     for (const [key, engine] of Object.entries(searchEngines)) {
-        const color = engineColors[key] || 'var(--primary-color)';
+        const color = engine.color || 'var(--primary-color)';
         html += `
             <a href="${engine.url}" target="_blank" rel="noopener noreferrer" class="reverse-search-card" style="--engine-color: ${color}">
                 <div class="reverse-search-icon">${engine.icon}</div>
                 <div class="reverse-search-name">${engine.name}</div>
                 <div class="reverse-search-action">
-                    Search Now →
+                    <i class="fas fa-arrow-right"></i> Search Now
                 </div>
             </a>
         `;
@@ -285,7 +277,7 @@ function displayReverseSearchResults(data) {
         <div class="result-item" style="margin-top: 1.5rem;">
             <details>
                 <summary style="cursor: pointer; color: var(--primary-color); font-weight: bold;">
-                    🔗 Direct Image URL
+                    <i class="fas fa-link"></i> Direct Image URL
                 </summary>
                 <div style="margin-top: 1rem;">
                     <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
@@ -299,18 +291,20 @@ function displayReverseSearchResults(data) {
                         style="width: 100%; padding: 0.75rem; background: var(--darker-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-family: monospace;"
                     />
                     <button
-                        onclick="navigator.clipboard.writeText('${data.image_url}'); this.textContent='✅ Copied!'; setTimeout(() => this.textContent='📋 Copy URL', 2000)"
+                        onclick="navigator.clipboard.writeText('${data.image_url}'); this.innerHTML='<i class=\\'fas fa-check\\'></i> Copied!'; setTimeout(() => this.innerHTML='<i class=\\'fas fa-copy\\'></i> Copy URL', 2000)"
                         class="btn btn-secondary"
                         style="margin-top: 0.5rem;"
                     >
-                        📋 Copy URL
+                        <i class="fas fa-copy"></i> Copy URL
                     </button>
                 </div>
             </details>
         </div>
 
         <div class="result-item" style="margin-top: 1rem; background: var(--darker-bg); border-left: 3px solid var(--warning-color);">
-            <h4 style="color: var(--warning-color); margin-bottom: 0.5rem;">💡 Tips for Best Results</h4>
+            <h4 style="color: var(--warning-color); margin-bottom: 0.5rem;">
+                <i class="fas fa-lightbulb"></i> Tips for Best Results
+            </h4>
             <ul style="margin-left: 1.5rem; color: var(--text-muted);">
                 <li>Try multiple search engines for comprehensive results</li>
                 <li>Google and Yandex usually have the largest image databases</li>
@@ -705,31 +699,31 @@ function displayDashboard(results, data) {
     // Check steghide
     if (results.steghide?.success && results.steghide.data.attempts?.some(a => a.success)) {
         findingsCount.steganography++;
-        findings.push({ type: 'success', icon: '🔐', title: 'Steghide Data Found', desc: 'Hidden data extracted with password' });
+        findings.push({ type: 'success', icon: 'fa-lock', title: 'Steghide Data Found', desc: 'Hidden data extracted with password' });
     }
 
     // Check outguess
     if (results.outguess?.success && results.outguess.data.success) {
         findingsCount.steganography++;
-        findings.push({ type: 'success', icon: '🔓', title: 'Outguess Data Found', desc: 'Hidden data detected' });
+        findings.push({ type: 'success', icon: 'fa-unlock', title: 'Outguess Data Found', desc: 'Hidden data detected' });
     }
 
     // Check zsteg
     if (results.zsteg?.success && results.zsteg.data.findings?.length > 0) {
         findingsCount.steganography++;
-        findings.push({ type: 'info', icon: '💎', title: 'Zsteg Findings', desc: `${results.zsteg.data.findings.length} potential findings` });
+        findings.push({ type: 'info', icon: 'fa-gem', title: 'Zsteg Findings', desc: `${results.zsteg.data.findings.length} potential findings` });
     }
 
     // Check entropy
     if (results.entropy?.success && results.entropy.data.suspicious_blocks?.length > 0) {
         findingsCount.forensics++;
-        findings.push({ type: 'warning', icon: '📊', title: 'Entropy Anomalies', desc: `${results.entropy.data.suspicious_blocks.length} suspicious blocks detected` });
+        findings.push({ type: 'warning', icon: 'fa-wave-square', title: 'Entropy Anomalies', desc: `${results.entropy.data.suspicious_blocks.length} suspicious blocks detected` });
     }
 
     // Check forensics
     if (results.forensics?.success && results.forensics.data.ela_findings?.length > 0) {
         findingsCount.forensics++;
-        findings.push({ type: 'warning', icon: '🔬', title: 'Manipulation Detected', desc: results.forensics.data.ela_findings.join(', ') });
+        findings.push({ type: 'warning', icon: 'fa-microscope', title: 'Manipulation Detected', desc: results.forensics.data.ela_findings.join(', ') });
     }
 
     // Check GPS
@@ -737,7 +731,7 @@ function displayDashboard(results, data) {
         const metadata = results.metadata.data.metadata || {};
         if (Object.keys(metadata).some(k => k.toLowerCase().includes('gps'))) {
             findingsCount.metadata++;
-            findings.push({ type: 'info', icon: '📍', title: 'GPS Data Found', desc: 'Location information in metadata' });
+            findings.push({ type: 'info', icon: 'fa-map-marker-alt', title: 'GPS Data Found', desc: 'Location information in metadata' });
         }
     }
 
@@ -747,7 +741,7 @@ function displayDashboard(results, data) {
                           (results.file_carving.data.foremost?.extracted_files?.length || 0);
         if (totalFiles > 0) {
             findingsCount.other++;
-            findings.push({ type: 'success', icon: '🗂️', title: 'Embedded Files Found', desc: `${totalFiles} files extracted` });
+            findings.push({ type: 'success', icon: 'fa-folder-open', title: 'Embedded Files Found', desc: `${totalFiles} files extracted` });
         }
     }
 
@@ -755,7 +749,9 @@ function displayDashboard(results, data) {
 
     const summaryHTML = `
         <div class="result-item" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-color) 100%); border: none; color: white;">
-            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">📊 Analysis Summary</h3>
+            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">
+                <i class="fas fa-chart-pie"></i> Analysis Summary
+            </h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
                 <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
                     <div style="font-size: 2rem; font-weight: bold;">${totalFindings}</div>
@@ -779,7 +775,7 @@ function displayDashboard(results, data) {
 
     const findingsHTML = findings.length > 0 ? `
         <div class="result-item">
-            <h3>🔍 Key Findings</h3>
+            <h3><i class="fas fa-search"></i> Key Findings</h3>
             <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
                 ${findings.map(f => {
                     const colors = {
@@ -790,7 +786,7 @@ function displayDashboard(results, data) {
                     return `
                         <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; border-left: 4px solid ${colors[f.type]};">
                             <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <div style="font-size: 2rem;">${f.icon}</div>
+                                <div style="font-size: 2rem; color: ${colors[f.type]};"><i class="fas ${f.icon}"></i></div>
                                 <div>
                                     <div style="font-weight: bold; color: ${colors[f.type]};">${f.title}</div>
                                     <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">${f.desc}</div>
@@ -804,32 +800,32 @@ function displayDashboard(results, data) {
     ` : `
         <div class="result-item">
             <p style="color: var(--text-muted); text-align: center; padding: 2rem;">
-                ℹ️ No significant findings detected. Explore individual analysis tabs for detailed information.
+                <i class="fas fa-info-circle"></i> No significant findings detected. Explore individual analysis tabs for detailed information.
             </p>
         </div>
     `;
 
     const analysesHTML = `
         <div class="result-item">
-            <h3>📋 Analysis Methods Used</h3>
+            <h3><i class="fas fa-list-check"></i> Analysis Methods Used</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 1rem;">
                 ${Object.entries(results).map(([name, result]) => {
                     const icons = {
-                        lsb: '🔢',
-                        metadata: '📝',
-                        color_analysis: '🎨',
-                        steghide: '🔒',
-                        outguess: '🔓',
-                        zsteg: '💎',
-                        entropy: '📊',
-                        forensics: '🔬',
-                        strings: '📄',
-                        file_carving: '🗂️'
+                        lsb: 'fa-th',
+                        metadata: 'fa-tags',
+                        color_analysis: 'fa-palette',
+                        steghide: 'fa-lock',
+                        outguess: 'fa-unlock',
+                        zsteg: 'fa-gem',
+                        entropy: 'fa-wave-square',
+                        forensics: 'fa-microscope',
+                        strings: 'fa-file-alt',
+                        file_carving: 'fa-folder-open'
                     };
-                    const status = result.success ? '✅' : '❌';
+                    const status = result.success ? '<i class="fas fa-check-circle" style="color: var(--success-color)"></i>' : '<i class="fas fa-times-circle" style="color: var(--danger-color)"></i>';
                     return `
-                        <div style="background: var(--darker-bg); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.9rem;">
-                            ${status} ${icons[name] || '🔧'} ${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        <div style="background: var(--darker-bg); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                            ${status} <i class="fas ${icons[name] || 'fa-tools'}"></i> ${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                         </div>
                     `;
                 }).join('')}
@@ -846,7 +842,7 @@ function displayColorAnalysisResults(data) {
 
     let html = `
         <div class="result-item">
-            <h3>🎨 Color Information</h3>
+            <h3><i class="fas fa-palette"></i> Color Information</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                 <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
                     <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">UNIQUE COLORS</div>
@@ -867,7 +863,7 @@ function displayColorAnalysisResults(data) {
     if (data.palette_file) {
         html += `
             <div class="result-item">
-                <h3>🎨 Color Palette (Top 10)</h3>
+                <h3><i class="fas fa-swatchbook"></i> Color Palette (Top 10)</h3>
                 <img src="/api/download/${currentAnalysisId}/${data.palette_file}"
                      alt="Color Palette"
                      style="width: 100%; max-width: 800px; border-radius: 8px; margin-top: 1rem;">
@@ -878,7 +874,7 @@ function displayColorAnalysisResults(data) {
     if (data.histogram_files) {
         html += `
             <div class="result-item">
-                <h3>📊 Color Channel Histograms</h3>
+                <h3><i class="fas fa-chart-bar"></i> Color Channel Histograms</h3>
                 <div class="image-grid">
                     ${['r', 'g', 'b'].map(ch => {
                         const file = data.histogram_files[`histogram_${ch}.png`];
@@ -901,7 +897,7 @@ function displayColorAnalysisResults(data) {
     if (data.interpretation) {
         html += `
             <div class="result-item">
-                <h3>💡 Interpretation</h3>
+                <h3><i class="fas fa-lightbulb"></i> Interpretation</h3>
                 <ul style="margin-left: 1.5rem; color: var(--text-muted);">
                     ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
                 </ul>
@@ -918,7 +914,7 @@ function displayEntropyResults(data) {
 
     let html = `
         <div class="result-item">
-            <h3>📊 Entropy Analysis</h3>
+            <h3><i class="fas fa-wave-square"></i> Entropy Analysis</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
                 <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px;">
                     <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.25rem;">OVERALL ENTROPY</div>
@@ -929,7 +925,7 @@ function displayEntropyResults(data) {
         </div>
 
         <div class="result-item">
-            <h3>🎨 Channel Entropy</h3>
+            <h3><i class="fas fa-layer-group"></i> Channel Entropy</h3>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
                 ${Object.entries(data.channel_entropy || {}).map(([channel, value]) => {
                     const colors = { R: '#ff0000', G: '#00ff00', B: '#0000ff' };
@@ -947,7 +943,7 @@ function displayEntropyResults(data) {
     if (data.block_entropy) {
         html += `
             <div class="result-item">
-                <h3>🔲 Block-Based Entropy (8x8 blocks)</h3>
+                <h3><i class="fas fa-border-all"></i> Block-Based Entropy (8x8 blocks)</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
                     <div style="background: var(--darker-bg); padding: 0.75rem; border-radius: 8px;">
                         <div style="color: var(--text-muted); font-size: 0.8rem;">Average</div>
@@ -969,7 +965,7 @@ function displayEntropyResults(data) {
     if (data.suspicious_blocks && data.suspicious_blocks.length > 0) {
         html += `
             <div class="result-item" style="border-left: 4px solid var(--warning-color);">
-                <h3 style="color: var(--warning-color);">⚠️ Suspicious Blocks Detected</h3>
+                <h3 style="color: var(--warning-color);"><i class="fas fa-exclamation-triangle"></i> Suspicious Blocks Detected</h3>
                 <p>Found ${data.suspicious_blocks.length} blocks with unusually high entropy (>20% above average)</p>
                 <details style="margin-top: 1rem;">
                     <summary style="cursor: pointer; color: var(--primary-color);">View block details</summary>
@@ -989,7 +985,7 @@ function displayEntropyResults(data) {
     if (data.entropy_map_file) {
         html += `
             <div class="result-item">
-                <h3>🗺️ Entropy Heatmap</h3>
+                <h3><i class="fas fa-map"></i> Entropy Heatmap</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1rem;">
                     Brighter areas indicate higher entropy (more randomness/complexity)
                 </p>
@@ -1003,7 +999,7 @@ function displayEntropyResults(data) {
     if (data.interpretation) {
         html += `
             <div class="result-item">
-                <h3>💡 Interpretation</h3>
+                <h3><i class="fas fa-lightbulb"></i> Interpretation</h3>
                 <ul style="margin-left: 1.5rem; color: var(--text-muted);">
                     ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
                 </ul>
@@ -1023,7 +1019,7 @@ function displayForensicsResults(data) {
     if (data.ela_file) {
         html += `
             <div class="result-item">
-                <h3>🔍 Error Level Analysis (ELA)</h3>
+                <h3><i class="fas fa-search-plus"></i> Error Level Analysis (ELA)</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1rem;">
                     ELA highlights areas that have been modified or compressed at different quality levels.
                     Bright areas may indicate manipulation.
@@ -1038,7 +1034,7 @@ function displayForensicsResults(data) {
     if (data.ela_findings && data.ela_findings.length > 0) {
         html += `
             <div class="result-item" style="border-left: 4px solid var(--warning-color);">
-                <h3 style="color: var(--warning-color);">⚠️ Findings</h3>
+                <h3 style="color: var(--warning-color);"><i class="fas fa-exclamation-triangle"></i> Findings</h3>
                 <ul style="margin-left: 1.5rem; color: var(--text-muted);">
                     ${data.ela_findings.map(f => `<li>${f}</li>`).join('')}
                 </ul>
@@ -1050,7 +1046,7 @@ function displayForensicsResults(data) {
         const ca = data.compression_analysis;
         html += `
             <div class="result-item">
-                <h3>📐 JPEG Compression Analysis</h3>
+                <h3><i class="fas fa-compress"></i> JPEG Compression Analysis</h3>
                 <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                         ${ca.estimated_quality ? `
@@ -1075,7 +1071,7 @@ function displayForensicsResults(data) {
     if (data.interpretation) {
         html += `
             <div class="result-item">
-                <h3>💡 Interpretation</h3>
+                <h3><i class="fas fa-lightbulb"></i> Interpretation</h3>
                 <ul style="margin-left: 1.5rem; color: var(--text-muted);">
                     ${data.interpretation.map(i => `<li>${i}</li>`).join('')}
                 </ul>

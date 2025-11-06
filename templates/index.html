@@ -4,50 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StegMage - Steganography Analysis Platform</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🔮 StegMage</h1>
-            <p class="tagline">Unveil Hidden Secrets in Images</p>
+            <div class="logo">
+                <i class="fas fa-eye-slash"></i>
+                <h1>StegMage</h1>
+            </div>
+            <p class="tagline">Professional Steganography Analysis Platform</p>
         </header>
 
         <main>
             <!-- Upload Section -->
             <section id="upload-section" class="card">
-                <h2>Upload Image for Analysis</h2>
-                <div class="upload-area" id="upload-area">
-                    <input type="file" id="file-input" accept="image/*" style="display: none;">
-                    <div class="upload-prompt">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        <p>Drag & drop your image here</p>
-                        <p class="or">or</p>
-                        <button class="btn btn-primary" id="browse-btn">Browse Files</button>
-                        <p class="supported-formats">Supported: PNG, JPG, GIF, BMP, TIFF</p>
-                    </div>
+                <div class="card-header">
+                    <i class="fas fa-upload"></i>
+                    <h2>Upload Image for Analysis</h2>
                 </div>
+                <div class="card-body">
+                    <div class="upload-area" id="upload-area">
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                        <div class="upload-prompt">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p class="upload-title">Drag & drop your image here</p>
+                            <p class="upload-separator">or</p>
+                            <button class="btn btn-primary" id="browse-btn">
+                                <i class="fas fa-folder-open"></i>
+                                Browse Files
+                            </button>
+                            <p class="supported-formats">
+                                <i class="fas fa-info-circle"></i>
+                                Supported: PNG, JPG, GIF, BMP, TIFF
+                            </p>
+                        </div>
+                    </div>
 
-                <!-- Advanced Options -->
-                <div class="advanced-options">
-                    <button class="btn btn-secondary" id="toggle-advanced" style="margin-top: 1rem;">
-                        ⚙️ Advanced Options
-                    </button>
-                    <div id="advanced-section" style="display: none; margin-top: 1rem;">
-                        <div class="option-group">
-                            <h3>🔐 Steghide Password</h3>
-                            <p class="option-description">Enter custom passwords to try for steghide extraction (one per line)</p>
-                            <textarea
-                                id="steghide-passwords"
-                                placeholder="mypassword&#10;secret123&#10;CTF{flag}"
-                                rows="4"
-                                style="width: 100%; padding: 0.75rem; border-radius: 8px; background: var(--darker-bg); border: 1px solid var(--border-color); color: var(--text-color); font-family: monospace; resize: vertical;"
-                            ></textarea>
-                            <p class="option-hint">💡 Tip: Leave empty to use default passwords (empty, password, 123456, admin, root)</p>
+                    <!-- Advanced Options -->
+                    <div class="advanced-options">
+                        <button class="btn btn-secondary" id="toggle-advanced">
+                            <i class="fas fa-cog"></i>
+                            Advanced Options
+                        </button>
+                        <div id="advanced-section" style="display: none;">
+                            <div class="option-group">
+                                <div class="option-header">
+                                    <i class="fas fa-key"></i>
+                                    <h3>Steghide Custom Passwords</h3>
+                                </div>
+                                <p class="option-description">Enter custom passwords to try for steghide extraction (one per line)</p>
+                                <textarea
+                                    id="steghide-passwords"
+                                    placeholder="mypassword&#10;secret123&#10;CTF{flag}"
+                                    rows="4"
+                                ></textarea>
+                                <p class="option-hint">
+                                    <i class="fas fa-lightbulb"></i>
+                                    Leave empty to use default passwords
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,99 +80,156 @@
 
             <!-- Progress Section -->
             <section id="progress-section" class="card" style="display: none;">
-                <h2>Analysis in Progress</h2>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
+                <div class="card-header">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <h2>Analysis in Progress</h2>
                 </div>
-                <p id="progress-text">Uploading file...</p>
+                <div class="card-body">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="progress-text">Uploading file...</p>
+                </div>
             </section>
 
             <!-- Results Section -->
             <section id="results-section" class="card" style="display: none;">
-                <h2>Analysis Results</h2>
-
-                <!-- Category Navigation -->
-                <div class="category-tabs">
-                    <button class="category-btn active" data-category="overview">📊 Overview</button>
-                    <button class="category-btn" data-category="basic">📄 Basic Info</button>
-                    <button class="category-btn" data-category="stego">🔐 Steganography</button>
-                    <button class="category-btn" data-category="forensics">🔬 Forensics</button>
-                    <button class="category-btn" data-category="additional">🔧 Additional</button>
+                <div class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h2>Analysis Results</h2>
                 </div>
+                <div class="card-body">
+                    <!-- Category Navigation -->
+                    <div class="category-tabs">
+                        <button class="category-btn active" data-category="overview">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Overview</span>
+                        </button>
+                        <button class="category-btn" data-category="basic">
+                            <i class="fas fa-info-circle"></i>
+                            <span>Basic Info</span>
+                        </button>
+                        <button class="category-btn" data-category="stego">
+                            <i class="fas fa-lock"></i>
+                            <span>Steganography</span>
+                        </button>
+                        <button class="category-btn" data-category="forensics">
+                            <i class="fas fa-microscope"></i>
+                            <span>Forensics</span>
+                        </button>
+                        <button class="category-btn" data-category="additional">
+                            <i class="fas fa-tools"></i>
+                            <span>Additional</span>
+                        </button>
+                    </div>
 
-                <!-- Overview Category -->
-                <div class="analysis-category active" id="category-overview">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="dashboard">📈 Dashboard</button>
-                        <button class="tab-btn" data-tab="reverse">🔍 Reverse Search</button>
+                    <!-- Overview Category -->
+                    <div class="analysis-category active" id="category-overview">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="dashboard">
+                                <i class="fas fa-chart-pie"></i> Dashboard
+                            </button>
+                            <button class="tab-btn" data-tab="reverse">
+                                <i class="fas fa-search"></i> Reverse Search
+                            </button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-dashboard" class="tab-pane active"></div>
+                            <div id="tab-reverse" class="tab-pane"></div>
+                        </div>
                     </div>
-                    <div class="tab-content">
-                        <div id="tab-dashboard" class="tab-pane active"></div>
-                        <div id="tab-reverse" class="tab-pane"></div>
-                    </div>
-                </div>
 
-                <!-- Basic Info Category -->
-                <div class="analysis-category" id="category-basic">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="metadata">📝 Metadata</button>
-                        <button class="tab-btn" data-tab="color">🎨 Color Analysis</button>
+                    <!-- Basic Info Category -->
+                    <div class="analysis-category" id="category-basic">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="metadata">
+                                <i class="fas fa-tags"></i> Metadata
+                            </button>
+                            <button class="tab-btn" data-tab="color">
+                                <i class="fas fa-palette"></i> Color Analysis
+                            </button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-metadata" class="tab-pane active"></div>
+                            <div id="tab-color" class="tab-pane"></div>
+                        </div>
                     </div>
-                    <div class="tab-content">
-                        <div id="tab-metadata" class="tab-pane active"></div>
-                        <div id="tab-color" class="tab-pane"></div>
-                    </div>
-                </div>
 
-                <!-- Steganography Category -->
-                <div class="analysis-category" id="category-stego">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="lsb">🔢 LSB Analysis</button>
-                        <button class="tab-btn" data-tab="steghide">🔒 Steghide</button>
-                        <button class="tab-btn" data-tab="outguess">🔓 Outguess</button>
-                        <button class="tab-btn" data-tab="zsteg">💎 Zsteg</button>
+                    <!-- Steganography Category -->
+                    <div class="analysis-category" id="category-stego">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="lsb">
+                                <i class="fas fa-th"></i> LSB Analysis
+                            </button>
+                            <button class="tab-btn" data-tab="steghide">
+                                <i class="fas fa-lock"></i> Steghide
+                            </button>
+                            <button class="tab-btn" data-tab="outguess">
+                                <i class="fas fa-unlock"></i> Outguess
+                            </button>
+                            <button class="tab-btn" data-tab="zsteg">
+                                <i class="fas fa-gem"></i> Zsteg
+                            </button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-lsb" class="tab-pane active"></div>
+                            <div id="tab-steghide" class="tab-pane"></div>
+                            <div id="tab-outguess" class="tab-pane"></div>
+                            <div id="tab-zsteg" class="tab-pane"></div>
+                        </div>
                     </div>
-                    <div class="tab-content">
-                        <div id="tab-lsb" class="tab-pane active"></div>
-                        <div id="tab-steghide" class="tab-pane"></div>
-                        <div id="tab-outguess" class="tab-pane"></div>
-                        <div id="tab-zsteg" class="tab-pane"></div>
-                    </div>
-                </div>
 
-                <!-- Forensics Category -->
-                <div class="analysis-category" id="category-forensics">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="entropy">📊 Entropy</button>
-                        <button class="tab-btn" data-tab="forensics_ela">🔍 ELA & Manipulation</button>
+                    <!-- Forensics Category -->
+                    <div class="analysis-category" id="category-forensics">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="entropy">
+                                <i class="fas fa-wave-square"></i> Entropy
+                            </button>
+                            <button class="tab-btn" data-tab="forensics_ela">
+                                <i class="fas fa-search-plus"></i> ELA & Manipulation
+                            </button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-entropy" class="tab-pane active"></div>
+                            <div id="tab-forensics_ela" class="tab-pane"></div>
+                        </div>
                     </div>
-                    <div class="tab-content">
-                        <div id="tab-entropy" class="tab-pane active"></div>
-                        <div id="tab-forensics_ela" class="tab-pane"></div>
-                    </div>
-                </div>
 
-                <!-- Additional Category -->
-                <div class="analysis-category" id="category-additional">
-                    <div class="tabs">
-                        <button class="tab-btn active" data-tab="strings">📄 Strings</button>
-                        <button class="tab-btn" data-tab="file_carving">🗂️ File Carving</button>
+                    <!-- Additional Category -->
+                    <div class="analysis-category" id="category-additional">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="strings">
+                                <i class="fas fa-file-alt"></i> Strings
+                            </button>
+                            <button class="tab-btn" data-tab="file_carving">
+                                <i class="fas fa-folder-open"></i> File Carving
+                            </button>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-strings" class="tab-pane active"></div>
+                            <div id="tab-file_carving" class="tab-pane"></div>
+                        </div>
                     </div>
-                    <div class="tab-content">
-                        <div id="tab-strings" class="tab-pane active"></div>
-                        <div id="tab-file_carving" class="tab-pane"></div>
-                    </div>
-                </div>
 
-                <div class="actions">
-                    <button class="btn btn-secondary" id="new-analysis-btn">Analyze Another Image</button>
+                    <div class="actions">
+                        <button class="btn btn-secondary" id="new-analysis-btn">
+                            <i class="fas fa-redo"></i>
+                            Analyze Another Image
+                        </button>
+                    </div>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>Made with 🔮 by <a href="https://github.com/rl0x01/StegMage" target="_blank">StegMage Team</a></p>
-            <p class="disclaimer">For educational and authorized security testing purposes only</p>
+            <p>
+                <i class="fas fa-code"></i>
+                Made by <a href="https://github.com/rl0x01/StegMage" target="_blank">StegMage Team</a>
+            </p>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>
+                For educational and authorized security testing purposes only
+            </p>
         </footer>
     </div>
 
