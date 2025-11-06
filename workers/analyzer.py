@@ -16,6 +16,9 @@ from analyzers.outguess import OutguessAnalyzer
 from analyzers.file_carving import FileCarvingAnalyzer
 from analyzers.strings import StringsAnalyzer
 from analyzers.zsteg import ZstegAnalyzer
+from analyzers.color_analysis import ColorAnalyzer
+from analyzers.entropy import EntropyAnalyzer
+from analyzers.forensics import ForensicsAnalyzer
 
 
 def analyze_image(filepath: str, analysis_id: str, steghide_passwords=None):
@@ -47,14 +50,24 @@ def analyze_image(filepath: str, analysis_id: str, steghide_passwords=None):
     # Update status
     update_status(redis_conn, analysis_id, 'processing', 0)
 
-    # List of analyzers
+    # List of analyzers organized by category
     analyzers = [
-        ('lsb', LSBAnalyzer()),
+        # Basic Analysis
         ('metadata', MetadataAnalyzer()),
-        ('strings', StringsAnalyzer()),
-        ('zsteg', ZstegAnalyzer()),
+        ('color_analysis', ColorAnalyzer()),
+
+        # Steganography Detection
+        ('lsb', LSBAnalyzer()),
         ('steghide', SteghideAnalyzer()),
         ('outguess', OutguessAnalyzer()),
+        ('zsteg', ZstegAnalyzer()),
+
+        # Forensic Analysis
+        ('forensics', ForensicsAnalyzer()),
+        ('entropy', EntropyAnalyzer()),
+
+        # Additional Analysis
+        ('strings', StringsAnalyzer()),
         ('file_carving', FileCarvingAnalyzer()),
     ]
 
