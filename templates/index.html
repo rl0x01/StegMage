@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StegMage - Steganography Analysis Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 StegMage</h1>
+            <p class="tagline">Unveil Hidden Secrets in Images</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section id="upload-section" class="card">
+                <h2>Upload Image for Analysis</h2>
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    <div class="upload-prompt">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Drag & drop your image here</p>
+                        <p class="or">or</p>
+                        <button class="btn btn-primary" id="browse-btn">Browse Files</button>
+                        <p class="supported-formats">Supported: PNG, JPG, GIF, BMP, TIFF</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress-section" class="card" style="display: none;">
+                <h2>Analysis in Progress</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p id="progress-text">Uploading file...</p>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="card" style="display: none;">
+                <h2>Analysis Results</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="lsb">LSB Analysis</button>
+                    <button class="tab-btn" data-tab="metadata">Metadata</button>
+                    <button class="tab-btn" data-tab="strings">Strings</button>
+                    <button class="tab-btn" data-tab="zsteg">Zsteg</button>
+                    <button class="tab-btn" data-tab="steghide">Steghide</button>
+                    <button class="tab-btn" data-tab="outguess">Outguess</button>
+                    <button class="tab-btn" data-tab="file_carving">File Carving</button>
+                </div>
+
+                <div class="tab-content">
+                    <div id="tab-lsb" class="tab-pane active"></div>
+                    <div id="tab-metadata" class="tab-pane"></div>
+                    <div id="tab-strings" class="tab-pane"></div>
+                    <div id="tab-zsteg" class="tab-pane"></div>
+                    <div id="tab-steghide" class="tab-pane"></div>
+                    <div id="tab-outguess" class="tab-pane"></div>
+                    <div id="tab-file_carving" class="tab-pane"></div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-secondary" id="new-analysis-btn">Analyze Another Image</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made with 🔮 by <a href="https://github.com/rl0x01/StegMage" target="_blank">StegMage Team</a></p>
+            <p class="disclaimer">For educational and authorized security testing purposes only</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
