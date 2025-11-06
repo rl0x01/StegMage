@@ -84,7 +84,7 @@ def main():
     print("\n" + "=" * 50)
     print("Checking Network Connectivity...")
     print("=" * 50)
-    check_port('localhost', 5000, 'Flask App')
+    check_port('localhost', 8080, 'Flask App')
     check_port('localhost', 6379, 'Redis')
 
     print("\n" + "=" * 50)
@@ -102,7 +102,7 @@ def main():
     print("=" * 50)
     try:
         import urllib.request
-        response = urllib.request.urlopen('http://localhost:5000/health', timeout=5)
+        response = urllib.request.urlopen('http://localhost:8080/health', timeout=5)
         data = response.read().decode('utf-8')
         print(f"✅ Flask app responded: {data}")
     except Exception as e:

@@ -28,8 +28,8 @@ COPY . .
 # Create necessary directories
 RUN mkdir -p uploads results
 
-# Expose port
-EXPOSE 5000
+# Expose port (8080 for macOS compatibility - port 5000 is used by AirPlay)
+EXPOSE 8080
 
 # Run the application
 CMD ["python", "app.py"]

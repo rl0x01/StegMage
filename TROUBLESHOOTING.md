@@ -4,7 +4,7 @@
 
 ### 403 Forbidden Error
 
-If you get a 403 Forbidden error when accessing http://localhost:5000/, this is typically caused by:
+If you get a 403 Forbidden error when accessing http://localhost:8080/, this is typically caused by:
 
 #### 1. Redis Connection Issues
 
@@ -44,17 +44,19 @@ docker compose restart [service-name]
 
 #### 3. Port Conflicts
 
-**Symptom:** Port 5000 or 6379 is already in use.
+**Symptom:** Port 8080 or 6379 is already in use.
 
 **Solution:**
 ```bash
 # Check what's using the ports
-lsof -i :5000
+lsof -i :8080
 lsof -i :6379
 
 # Kill the process or change ports in docker-compose.yml
-# For example, change "5000:5000" to "5001:5000"
+# For example, change "8080:8080" to "8081:8080"
 ```
+
+**Note for macOS users:** Port 5000 is reserved by Apple's AirPlay Receiver service. StegMage uses port 8080 by default to avoid conflicts.
 
 ### Diagnostic Tool
 
@@ -145,7 +147,7 @@ docker compose logs -f
 
 Access the health check endpoint to verify services:
 ```bash
-curl http://localhost:5000/health
+curl http://localhost:8080/health
 ```
 
 Expected response:

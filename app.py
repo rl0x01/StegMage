@@ -176,8 +176,9 @@ def health():
 
 if __name__ == '__main__':
     # Development server
+    # Default port 8080 (macOS uses 5000 for AirPlay)
     app.run(
         host='0.0.0.0',
-        port=int(os.environ.get('PORT', 5000)),
+        port=int(os.environ.get('PORT', 8080)),
         debug=os.environ.get('DEBUG', 'False').lower() == 'true'
     )
