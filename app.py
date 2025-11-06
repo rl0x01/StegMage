@@ -164,6 +164,63 @@ def download_file(analysis_id, filename):
     return send_file(filepath, as_attachment=True)
 
 
+@app.route('/api/image/<analysis_id>', methods=['GET'])
+def serve_image(analysis_id):
+    """Serve the uploaded image for reverse image search"""
+    # Find the uploaded image file
+    upload_dir = app.config['UPLOAD_FOLDER']
+
+    # Look for files starting with analysis_id
+    for filename in os.listdir(upload_dir):
+        if filename.startswith(analysis_id):
+            filepath = os.path.join(upload_dir, filename)
+            return send_file(filepath, mimetype='image/jpeg')
+
+    return jsonify({'error': 'Image not found'}), 404
+
+
+@app.route('/api/reverse-search/<analysis_id>', methods=['GET'])
+def get_reverse_search_urls(analysis_id):
+    """Generate reverse image search URLs for various search engines"""
+    # Get the base URL (from request or environment)
+    base_url = request.url_root.rstrip('/')
+    image_url = f"{base_url}/api/image/{analysis_id}"
+
+    # Generate URLs for different search engines
+    search_urls = {
+        'google': {
+            'name': 'Google Images',
+            'url': f"https://www.google.com/searchbyimage?image_url={image_url}",
+            'icon': '🔍'
+        },
+        'yandex': {
+            'name': 'Yandex Images',
+            'url': f"https://yandex.com/images/search?rpt=imageview&url={image_url}",
+            'icon': '🔎'
+        },
+        'bing': {
+            'name': 'Bing Images',
+            'url': f"https://www.bing.com/images/search?view=detailv2&iss=sbi&form=SBIHMP&sbisrc=UrlPaste&q=imgurl:{image_url}",
+            'icon': '🔍'
+        },
+        'tineye': {
+            'name': 'TinEye',
+            'url': f"https://tineye.com/search?url={image_url}",
+            'icon': '👁️'
+        },
+        'sogou': {
+            'name': 'Sogou Images',
+            'url': f"https://pic.sogou.com/ris?query={image_url}",
+            'icon': '🔍'
+        }
+    }
+
+    return jsonify({
+        'image_url': image_url,
+        'search_engines': search_urls
+    })
+
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""

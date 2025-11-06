@@ -165,6 +165,9 @@ async function loadResults() {
 function displayResults(data) {
     const results = data.results;
 
+    // Load Reverse Image Search
+    loadReverseSearchResults();
+
     // LSB Analysis
     if (results.lsb && results.lsb.success) {
         displayLSBResults(results.lsb.data);
@@ -199,6 +202,108 @@ function displayResults(data) {
     if (results.file_carving && results.file_carving.success) {
         displayFileCarvingResults(results.file_carving.data);
     }
+}
+
+// Load and Display Reverse Image Search
+async function loadReverseSearchResults() {
+    const container = document.getElementById('tab-reverse');
+    container.innerHTML = '<div class="result-item"><p>Loading reverse search options...</p></div>';
+
+    try {
+        const response = await fetch(`/api/reverse-search/${currentAnalysisId}`);
+        const data = await response.json();
+
+        if (response.ok) {
+            displayReverseSearchResults(data);
+        } else {
+            container.innerHTML = '<div class="result-item"><p>Error loading reverse search options</p></div>';
+        }
+    } catch (error) {
+        console.error('Error loading reverse search:', error);
+        container.innerHTML = '<div class="result-item"><p>Error loading reverse search options</p></div>';
+    }
+}
+
+// Display Reverse Image Search Results
+function displayReverseSearchResults(data) {
+    const container = document.getElementById('tab-reverse');
+    const searchEngines = data.search_engines;
+
+    const engineColors = {
+        'google': '#4285f4',
+        'yandex': '#fc3f1d',
+        'bing': '#008373',
+        'tineye': '#d81159',
+        'sogou': '#fb6d3a'
+    };
+
+    let html = `
+        <div class="result-item">
+            <h3>🔍 Reverse Image Search</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                Search for this image across multiple search engines to find similar images, sources, or more information.
+            </p>
+        </div>
+
+        <div class="reverse-search-grid">
+    `;
+
+    for (const [key, engine] of Object.entries(searchEngines)) {
+        const color = engineColors[key] || 'var(--primary-color)';
+        html += `
+            <a href="${engine.url}" target="_blank" rel="noopener noreferrer" class="reverse-search-card" style="--engine-color: ${color}">
+                <div class="reverse-search-icon">${engine.icon}</div>
+                <div class="reverse-search-name">${engine.name}</div>
+                <div class="reverse-search-action">
+                    Search Now →
+                </div>
+            </a>
+        `;
+    }
+
+    html += `
+        </div>
+
+        <div class="result-item" style="margin-top: 1.5rem;">
+            <details>
+                <summary style="cursor: pointer; color: var(--primary-color); font-weight: bold;">
+                    🔗 Direct Image URL
+                </summary>
+                <div style="margin-top: 1rem;">
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Use this URL to search on other platforms:
+                    </p>
+                    <input
+                        type="text"
+                        value="${data.image_url}"
+                        readonly
+                        onclick="this.select()"
+                        style="width: 100%; padding: 0.75rem; background: var(--darker-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-family: monospace;"
+                    />
+                    <button
+                        onclick="navigator.clipboard.writeText('${data.image_url}'); this.textContent='✅ Copied!'; setTimeout(() => this.textContent='📋 Copy URL', 2000)"
+                        class="btn btn-secondary"
+                        style="margin-top: 0.5rem;"
+                    >
+                        📋 Copy URL
+                    </button>
+                </div>
+            </details>
+        </div>
+
+        <div class="result-item" style="margin-top: 1rem; background: var(--darker-bg); border-left: 3px solid var(--warning-color);">
+            <h4 style="color: var(--warning-color); margin-bottom: 0.5rem;">💡 Tips for Best Results</h4>
+            <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                <li>Try multiple search engines for comprehensive results</li>
+                <li>Google and Yandex usually have the largest image databases</li>
+                <li>TinEye specializes in tracking image modifications and sources</li>
+                <li>Bing can find visually similar images effectively</li>
+                <li>Some engines may require the image to be publicly accessible</li>
+            </ul>
+        </div>
+    `;
+
+    container.innerHTML = html;
 }
 
 // Display LSB Results

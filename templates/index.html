@@ -66,7 +66,8 @@
             <section id="results-section" class="card" style="display: none;">
                 <h2>Analysis Results</h2>
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="lsb">LSB Analysis</button>
+                    <button class="tab-btn active" data-tab="reverse">🔍 Reverse Search</button>
+                    <button class="tab-btn" data-tab="lsb">LSB Analysis</button>
                     <button class="tab-btn" data-tab="metadata">Metadata</button>
                     <button class="tab-btn" data-tab="strings">Strings</button>
                     <button class="tab-btn" data-tab="zsteg">Zsteg</button>
@@ -76,7 +77,8 @@
                 </div>
 
                 <div class="tab-content">
-                    <div id="tab-lsb" class="tab-pane active"></div>
+                    <div id="tab-reverse" class="tab-pane active"></div>
+                    <div id="tab-lsb" class="tab-pane"></div>
                     <div id="tab-metadata" class="tab-pane"></div>
                     <div id="tab-strings" class="tab-pane"></div>
                     <div id="tab-zsteg" class="tab-pane"></div>
