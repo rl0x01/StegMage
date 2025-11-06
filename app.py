@@ -23,10 +23,24 @@ app.config['RESULTS_FOLDER'] = 'results'
 # CORS configuration
 CORS(app)
 
-# Redis connection
+# Redis connection - lazy initialization
 redis_url = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
-redis_conn = redis.from_url(redis_url)
-task_queue = Queue('stegmage', connection=redis_conn)
+redis_conn = None
+task_queue = None
+
+def get_redis_connection():
+    """Get or create Redis connection"""
+    global redis_conn, task_queue
+    if redis_conn is None:
+        try:
+            redis_conn = redis.from_url(redis_url, socket_connect_timeout=5)
+            redis_conn.ping()
+            task_queue = Queue('stegmage', connection=redis_conn)
+        except Exception as e:
+            print(f"Warning: Could not connect to Redis: {e}")
+            redis_conn = None
+            task_queue = None
+    return redis_conn, task_queue
 
 # Ensure directories exist
 Path(app.config['UPLOAD_FOLDER']).mkdir(exist_ok=True)
@@ -62,6 +76,11 @@ def upload_file():
     if not allowed_file(file.filename):
         return jsonify({'error': 'File type not allowed'}), 400
 
+    # Check Redis connection
+    redis_conn, task_queue = get_redis_connection()
+    if task_queue is None:
+        return jsonify({'error': 'Job queue unavailable. Please check Redis connection.'}), 503
+
     # Generate unique ID for this analysis
     analysis_id = str(uuid.uuid4())
 
@@ -71,24 +90,31 @@ def upload_file():
     file.save(filepath)
 
     # Queue analysis job
-    job = task_queue.enqueue(
-        'workers.analyze_image',
-        filepath,
-        analysis_id,
-        job_timeout='10m'
-    )
+    try:
+        job = task_queue.enqueue(
+            'workers.analyze_image',
+            filepath,
+            analysis_id,
+            job_timeout='10m'
+        )
 
-    return jsonify({
-        'analysis_id': analysis_id,
-        'job_id': job.id,
-        'filename': filename,
-        'status': 'queued'
-    })
+        return jsonify({
+            'analysis_id': analysis_id,
+            'job_id': job.id,
+            'filename': filename,
+            'status': 'queued'
+        })
+    except Exception as e:
+        return jsonify({'error': f'Failed to queue job: {str(e)}'}), 500
 
 
 @app.route('/api/status/<analysis_id>', methods=['GET'])
 def check_status(analysis_id):
     """Check analysis status"""
+    redis_conn, _ = get_redis_connection()
+    if redis_conn is None:
+        return jsonify({'error': 'Redis unavailable'}), 503
+
     # Get job from Redis
     job_key = f"stegmage:job:{analysis_id}"
     job_data = redis_conn.get(job_key)
@@ -131,11 +157,21 @@ def download_file(analysis_id, filename):
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
-    try:
-        redis_conn.ping()
-        return jsonify({'status': 'healthy', 'redis': 'connected'})
-    except Exception as e:
-        return jsonify({'status': 'unhealthy', 'error': str(e)}), 503
+    redis_conn, _ = get_redis_connection()
+
+    redis_status = 'disconnected'
+    if redis_conn is not None:
+        try:
+            redis_conn.ping()
+            redis_status = 'connected'
+        except Exception:
+            redis_status = 'error'
+
+    return jsonify({
+        'status': 'healthy',
+        'redis': redis_status,
+        'app': 'running'
+    })
 
 
 if __name__ == '__main__':
