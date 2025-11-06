@@ -18,13 +18,14 @@ from analyzers.strings import StringsAnalyzer
 from analyzers.zsteg import ZstegAnalyzer
 
 
-def analyze_image(filepath: str, analysis_id: str):
+def analyze_image(filepath: str, analysis_id: str, steghide_passwords=None):
     """
     Main analysis function that runs all steganography detection methods
 
     Args:
         filepath: Path to the uploaded image
         analysis_id: Unique identifier for this analysis
+        steghide_passwords: Optional list of custom passwords for steghide
     """
     # Connect to Redis
     redis_url = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
@@ -63,7 +64,13 @@ def analyze_image(filepath: str, analysis_id: str):
     for idx, (name, analyzer) in enumerate(analyzers):
         try:
             print(f"Running {name} analyzer...")
-            result = analyzer.analyze(filepath, str(results_dir))
+
+            # Pass custom passwords to steghide analyzer
+            if name == 'steghide' and steghide_passwords:
+                result = analyzer.analyze(filepath, str(results_dir), custom_passwords=steghide_passwords)
+            else:
+                result = analyzer.analyze(filepath, str(results_dir))
+
             results['results'][name] = {
                 'success': True,
                 'data': result

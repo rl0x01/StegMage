@@ -283,6 +283,49 @@ header h1 {
     margin-left: 0.5rem;
 }
 
+/* Advanced Options */
+.advanced-options {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+#advanced-section {
+    text-align: left;
+    background: var(--darker-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.option-group {
+    margin-bottom: 1rem;
+}
+
+.option-group h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.option-description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.option-hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+#steghide-passwords:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
 /* Actions */
 .actions {
     text-align: center;

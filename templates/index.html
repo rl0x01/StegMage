@@ -31,6 +31,26 @@
                         <p class="supported-formats">Supported: PNG, JPG, GIF, BMP, TIFF</p>
                     </div>
                 </div>
+
+                <!-- Advanced Options -->
+                <div class="advanced-options">
+                    <button class="btn btn-secondary" id="toggle-advanced" style="margin-top: 1rem;">
+                        ⚙️ Advanced Options
+                    </button>
+                    <div id="advanced-section" style="display: none; margin-top: 1rem;">
+                        <div class="option-group">
+                            <h3>🔐 Steghide Password</h3>
+                            <p class="option-description">Enter custom passwords to try for steghide extraction (one per line)</p>
+                            <textarea
+                                id="steghide-passwords"
+                                placeholder="mypassword&#10;secret123&#10;CTF{flag}"
+                                rows="4"
+                                style="width: 100%; padding: 0.75rem; border-radius: 8px; background: var(--darker-bg); border: 1px solid var(--border-color); color: var(--text-color); font-family: monospace; resize: vertical;"
+                            ></textarea>
+                            <p class="option-hint">💡 Tip: Leave empty to use default passwords (empty, password, 123456, admin, root)</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Progress Section -->

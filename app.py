@@ -89,12 +89,22 @@ def upload_file():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], f"{analysis_id}_{filename}")
     file.save(filepath)
 
+    # Get custom passwords for steghide
+    steghide_passwords = None
+    if 'steghide_passwords' in request.form:
+        try:
+            import json
+            steghide_passwords = json.loads(request.form['steghide_passwords'])
+        except:
+            pass
+
     # Queue analysis job
     try:
         job = task_queue.enqueue(
             'workers.analyze_image',
             filepath,
             analysis_id,
+            steghide_passwords,
             job_timeout='10m'
         )
 

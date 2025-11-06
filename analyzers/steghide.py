@@ -16,15 +16,26 @@ class SteghideAnalyzer(BaseAnalyzer):
         """Check if steghide is installed"""
         return shutil.which('steghide') is not None
 
-    def analyze(self, filepath: str, output_dir: str) -> dict:
-        """Try to extract data with steghide"""
+    def analyze(self, filepath: str, output_dir: str, custom_passwords=None) -> dict:
+        """Try to extract data with steghide
+
+        Args:
+            filepath: Path to the image file
+            output_dir: Directory to save extracted files
+            custom_passwords: Optional list of custom passwords to try
+        """
         if not self.is_available():
             return {'error': 'steghide not installed'}
 
         results = {'attempts': []}
 
-        # Try common passwords
-        passwords = ['', 'password', '123456', 'admin', 'root']
+        # Use custom passwords if provided, otherwise use defaults
+        if custom_passwords:
+            passwords = custom_passwords
+            results['using_custom_passwords'] = True
+        else:
+            passwords = ['', 'password', '123456', 'admin', 'root']
+            results['using_custom_passwords'] = False
 
         for password in passwords:
             try:

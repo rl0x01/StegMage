@@ -13,6 +13,21 @@ const browseBtn = document.getElementById('browse-btn');
 const progressFill = document.getElementById('progress-fill');
 const progressText = document.getElementById('progress-text');
 const newAnalysisBtn = document.getElementById('new-analysis-btn');
+const toggleAdvancedBtn = document.getElementById('toggle-advanced');
+const advancedSection = document.getElementById('advanced-section');
+const steghidePasswordsInput = document.getElementById('steghide-passwords');
+
+// Toggle Advanced Options
+toggleAdvancedBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (advancedSection.style.display === 'none') {
+        advancedSection.style.display = 'block';
+        toggleAdvancedBtn.textContent = '⚙️ Hide Advanced Options';
+    } else {
+        advancedSection.style.display = 'none';
+        toggleAdvancedBtn.textContent = '⚙️ Advanced Options';
+    }
+});
 
 // Upload Area Click Handler
 uploadArea.addEventListener('click', () => fileInput.click());
@@ -54,6 +69,13 @@ uploadArea.addEventListener('drop', (e) => {
 async function uploadFile(file) {
     const formData = new FormData();
     formData.append('file', file);
+
+    // Get custom steghide passwords
+    const passwordsText = steghidePasswordsInput.value.trim();
+    if (passwordsText) {
+        const passwords = passwordsText.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+        formData.append('steghide_passwords', JSON.stringify(passwords));
+    }
 
     // Show progress section
     uploadSection.style.display = 'none';
@@ -300,15 +322,54 @@ function displaySteghideResults(data) {
         return;
     }
 
+    const passwordSource = data.using_custom_passwords ?
+        '<p style="color: var(--success-color); font-weight: bold;">🔐 Using your custom passwords</p>' :
+        '<p style="color: var(--text-muted);">Using default passwords (empty, password, 123456, admin, root)</p>';
+
+    const successfulAttempts = data.attempts.filter(a => a.success);
+    const failedAttempts = data.attempts.filter(a => !a.success);
+
+    let resultsHTML = '';
+
+    if (successfulAttempts.length > 0) {
+        resultsHTML += `
+            <div class="result-item" style="border-left: 4px solid var(--success-color);">
+                <h3 style="color: var(--success-color);">✅ Extraction Successful!</h3>
+                ${successfulAttempts.map(attempt => `
+                    <p><strong>Password used:</strong> <code style="background: var(--darker-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">${attempt.password}</code></p>
+                    <p><strong>Message:</strong> ${attempt.message}</p>
+                    ${attempt.output_file ? `<p><strong>Extracted file:</strong> ${attempt.output_file}</p>` : ''}
+                `).join('')}
+            </div>
+        `;
+    }
+
+    if (failedAttempts.length > 0) {
+        resultsHTML += `
+            <div class="result-item">
+                <h3>❌ Failed Attempts (${failedAttempts.length})</h3>
+                <details>
+                    <summary style="cursor: pointer; color: var(--primary-color);">Click to view details</summary>
+                    <div style="margin-top: 1rem;">
+                        ${failedAttempts.map(attempt => `
+                            <div style="padding: 0.5rem; margin: 0.5rem 0; background: var(--darker-bg); border-radius: 4px;">
+                                <p><strong>Password:</strong> <code>${attempt.password}</code></p>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">${attempt.message}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </details>
+            </div>
+        `;
+    }
+
     container.innerHTML = `
         <div class="result-item">
-            <h3>Steghide Extraction Attempts</h3>
-            ${data.attempts.map(attempt => `
-                <p><strong>Password:</strong> ${attempt.password} -
-                ${attempt.success ? '✅ Success' : '❌ Failed'}</p>
-                <p>${attempt.message}</p>
-            `).join('<hr>')}
+            <h3>🔐 Steghide Password Extraction</h3>
+            ${passwordSource}
+            <p><strong>Total attempts:</strong> ${data.attempts.length}</p>
         </div>
+        ${resultsHTML || '<div class="result-item"><p>No extraction attempts were made.</p></div>'}
     `;
 }
 
@@ -400,4 +461,9 @@ function resetUI() {
     resultsSection.style.display = 'none';
     fileInput.value = '';
     progressFill.style.width = '0%';
+
+    // Reset advanced options
+    steghidePasswordsInput.value = '';
+    advancedSection.style.display = 'none';
+    toggleAdvancedBtn.textContent = '⚙️ Advanced Options';
 }
