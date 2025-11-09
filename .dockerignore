@@ -31,7 +31,8 @@ results/*
 # Documentation
 README.md
 LICENSE
-*.md
+SECURITY.md
+DEPLOYMENT.md
 
 # Docker
 Dockerfile

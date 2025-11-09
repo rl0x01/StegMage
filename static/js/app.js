@@ -7,6 +7,7 @@ let pollInterval = null;
 const uploadSection = document.getElementById('upload-section');
 const progressSection = document.getElementById('progress-section');
 const resultsSection = document.getElementById('results-section');
+const historySection = document.getElementById('history-section');
 const uploadArea = document.getElementById('upload-area');
 const fileInput = document.getElementById('file-input');
 const browseBtn = document.getElementById('browse-btn');
@@ -16,6 +17,9 @@ const newAnalysisBtn = document.getElementById('new-analysis-btn');
 const toggleAdvancedBtn = document.getElementById('toggle-advanced');
 const advancedSection = document.getElementById('advanced-section');
 const steghidePasswordsInput = document.getElementById('steghide-passwords');
+const toggleHistoryBtn = document.getElementById('toggle-history-btn');
+const deleteAllBtn = document.getElementById('delete-all-btn');
+const historyList = document.getElementById('history-list');
 
 // Toggle Advanced Options
 toggleAdvancedBtn.addEventListener('click', (e) => {
@@ -754,26 +758,26 @@ function displayDashboard(results, data) {
     const totalFindings = findingsCount.steganography + findingsCount.forensics + findingsCount.metadata + findingsCount.other;
 
     const summaryHTML = `
-        <div class="result-item" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-color) 100%); border: none; color: white;">
-            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">
+        <div class="result-item dashboard-summary">
+            <h3>
                 <i class="fas fa-chart-pie"></i> Analysis Summary
             </h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold;">${totalFindings}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Total Findings</div>
+            <div class="dashboard-stats-grid">
+                <div class="dashboard-stat-card">
+                    <div class="dashboard-stat-value">${totalFindings}</div>
+                    <div class="dashboard-stat-label">Total Findings</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.steganography}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Steganography</div>
+                <div class="dashboard-stat-card">
+                    <div class="dashboard-stat-value">${findingsCount.steganography}</div>
+                    <div class="dashboard-stat-label">Steganography</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.forensics}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Forensics</div>
+                <div class="dashboard-stat-card">
+                    <div class="dashboard-stat-value">${findingsCount.forensics}</div>
+                    <div class="dashboard-stat-label">Forensics</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; text-align: center;">
-                    <div style="font-size: 2rem; font-weight: bold;">${findingsCount.other}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Other</div>
+                <div class="dashboard-stat-card">
+                    <div class="dashboard-stat-value">${findingsCount.other}</div>
+                    <div class="dashboard-stat-label">Other</div>
                 </div>
             </div>
         </div>
@@ -782,39 +786,35 @@ function displayDashboard(results, data) {
     const findingsHTML = findings.length > 0 ? `
         <div class="result-item">
             <h3><i class="fas fa-search"></i> Key Findings</h3>
-            <div style="display: grid; gap: 0.75rem; margin-top: 1rem;">
-                ${findings.map(f => {
-                    const colors = {
-                        success: 'var(--success-color)',
-                        warning: 'var(--warning-color)',
-                        info: 'var(--primary-color)'
-                    };
-                    return `
-                        <div style="background: var(--darker-bg); padding: 1rem; border-radius: 8px; border-left: 4px solid ${colors[f.type]};">
-                            <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                <div style="font-size: 2rem; color: ${colors[f.type]};"><i class="fas ${f.icon}"></i></div>
-                                <div>
-                                    <div style="font-weight: bold; color: ${colors[f.type]};">${f.title}</div>
-                                    <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem;">${f.desc}</div>
-                                </div>
+            <div class="findings-grid">
+                ${findings.map(f => `
+                    <div class="finding-card ${f.type}">
+                        <div class="finding-icon-wrapper ${f.type}">
+                            <div class="finding-icon ${f.type}">
+                                <i class="fas ${f.icon}"></i>
                             </div>
                         </div>
-                    `;
-                }).join('')}
+                        <div class="finding-content">
+                            <div class="finding-title">${f.title}</div>
+                            <div class="finding-desc">${f.desc}</div>
+                        </div>
+                    </div>
+                `).join('')}
             </div>
         </div>
     ` : `
         <div class="result-item">
-            <p style="color: var(--text-muted); text-align: center; padding: 2rem;">
-                <i class="fas fa-info-circle"></i> No significant findings detected. Explore individual analysis tabs for detailed information.
-            </p>
+            <div class="no-findings">
+                <i class="fas fa-info-circle"></i>
+                <p>No significant findings detected. Explore individual analysis tabs for detailed information.</p>
+            </div>
         </div>
     `;
 
     const analysesHTML = `
         <div class="result-item">
             <h3><i class="fas fa-list-check"></i> Analysis Methods Used</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; margin-top: 1rem;">
+            <div class="analysis-methods-grid">
                 ${Object.entries(results).map(([name, result]) => {
                     const icons = {
                         lsb: 'fa-th',
@@ -828,10 +828,14 @@ function displayDashboard(results, data) {
                         strings: 'fa-file-alt',
                         file_carving: 'fa-folder-open'
                     };
-                    const status = result.success ? '<i class="fas fa-check-circle" style="color: var(--success-color)"></i>' : '<i class="fas fa-times-circle" style="color: var(--danger-color)"></i>';
+                    const statusIcon = result.success
+                        ? '<i class="fas fa-check-circle"></i>'
+                        : '<i class="fas fa-times-circle"></i>';
                     return `
-                        <div style="background: var(--darker-bg); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
-                            ${status} <i class="fas ${icons[name] || 'fa-tools'}"></i> ${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        <div class="analysis-method-item">
+                            ${statusIcon}
+                            <i class="fas ${icons[name] || 'fa-tools'}"></i>
+                            ${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                         </div>
                     `;
                 }).join('')}
@@ -1122,6 +1126,35 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 // New Analysis Button
 newAnalysisBtn.addEventListener('click', resetUI);
 
+// Delete Results Button
+const deleteResultsBtn = document.getElementById('delete-results-btn');
+deleteResultsBtn.addEventListener('click', async () => {
+    if (!currentAnalysisId) {
+        return;
+    }
+
+    if (!confirm('Are you sure you want to delete all results for this analysis? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/results/${currentAnalysisId}`, {
+            method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert('Results deleted successfully');
+            resetUI();
+        } else {
+            throw new Error(data.error || 'Failed to delete results');
+        }
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+});
+
 // Reset UI
 function resetUI() {
     currentAnalysisId = null;
@@ -1132,6 +1165,7 @@ function resetUI() {
     uploadSection.style.display = 'block';
     progressSection.style.display = 'none';
     resultsSection.style.display = 'none';
+    historySection.style.display = 'none';
     fileInput.value = '';
     progressFill.style.width = '0%';
 
@@ -1140,3 +1174,161 @@ function resetUI() {
     advancedSection.style.display = 'none';
     toggleAdvancedBtn.textContent = '⚙️ Advanced Options';
 }
+
+// Toggle History
+toggleHistoryBtn.addEventListener('click', async () => {
+    if (historySection.style.display === 'none') {
+        await loadHistory();
+        uploadSection.style.display = 'none';
+        progressSection.style.display = 'none';
+        resultsSection.style.display = 'none';
+        historySection.style.display = 'block';
+    } else {
+        historySection.style.display = 'none';
+        uploadSection.style.display = 'block';
+    }
+});
+
+// Load History
+async function loadHistory() {
+    try {
+        const response = await fetch('/api/results');
+        const data = await response.json();
+
+        if (response.ok) {
+            displayHistory(data.results);
+        } else {
+            throw new Error(data.error || 'Failed to load history');
+        }
+    } catch (error) {
+        console.error('Error loading history:', error);
+        historyList.innerHTML = `
+            <div class="history-empty">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Failed to load history: ${error.message}</p>
+            </div>
+        `;
+    }
+}
+
+// Display History
+function displayHistory(results) {
+    if (!results || results.length === 0) {
+        historyList.innerHTML = `
+            <div class="history-empty">
+                <i class="fas fa-history"></i>
+                <p>No analysis history yet</p>
+                <p style="font-size: 0.9rem; margin-top: 8px;">Upload an image to start analyzing</p>
+            </div>
+        `;
+        return;
+    }
+
+    historyList.innerHTML = results.map(item => {
+        const date = new Date(item.created_at);
+        const dateStr = date.toLocaleString();
+        const fileSizeKB = (item.file_size / 1024).toFixed(2);
+
+        return `
+            <div class="history-item">
+                <div class="history-info">
+                    <div class="history-meta">
+                        <span>
+                            <i class="fas fa-clock"></i>
+                            ${dateStr}
+                        </span>
+                        <span>
+                            <i class="fas fa-image"></i>
+                            ${item.image_format} - ${item.image_size}
+                        </span>
+                        <span>
+                            <i class="fas fa-file"></i>
+                            ${fileSizeKB} KB
+                        </span>
+                    </div>
+                    <div>
+                        <span class="history-badge ${item.has_findings ? 'findings' : 'no-findings'}">
+                            ${item.has_findings ? '✓ Findings Detected' : 'No Findings'}
+                        </span>
+                    </div>
+                </div>
+                <div class="history-actions">
+                    <button class="btn btn-primary btn-sm" onclick="loadHistoryResult('${item.analysis_id}')">
+                        <i class="fas fa-eye"></i>
+                        View
+                    </button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteHistoryItem('${item.analysis_id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Load History Result
+async function loadHistoryResult(analysisId) {
+    currentAnalysisId = analysisId;
+
+    try {
+        const response = await fetch(`/api/results/${analysisId}`);
+        const data = await response.json();
+
+        if (response.ok) {
+            historySection.style.display = 'none';
+            resultsSection.style.display = 'block';
+            displayResults(data);
+        } else {
+            throw new Error(data.error || 'Failed to load results');
+        }
+    } catch (error) {
+        alert('Error loading results: ' + error.message);
+    }
+}
+
+// Delete History Item
+async function deleteHistoryItem(analysisId) {
+    if (!confirm('Are you sure you want to delete this analysis?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/results/${analysisId}`, {
+            method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            await loadHistory();
+        } else {
+            throw new Error(data.error || 'Failed to delete');
+        }
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
+
+// Delete All Results
+deleteAllBtn.addEventListener('click', async () => {
+    if (!confirm('Are you sure you want to delete ALL analysis results? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/results', {
+            method: 'DELETE'
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(`Successfully deleted ${data.deleted_count} items`);
+            await loadHistory();
+        } else {
+            throw new Error(data.error || 'Failed to delete all results');
+        }
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+});

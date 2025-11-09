@@ -1,0 +1,2321 @@
+{
+  "analysis_id": "497ba85b-5b25-413c-bd8d-b3c869c9f00c",
+  "filename": "497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg",
+  "timestamp": "2025-11-06T20:03:41.875411",
+  "status": "completed",
+  "results": {
+    "metadata": {
+      "success": true,
+      "data": {
+        "metadata": {
+          "SourceFile": "uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg",
+          "ExifToolVersion": 13.25,
+          "FileName": "497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg",
+          "Directory": "uploads",
+          "FileSize": "98 kB",
+          "FileModifyDate": "2025:11:06 20:03:41+00:00",
+          "FileAccessDate": "2025:11:06 20:03:41+00:00",
+          "FileInodeChangeDate": "2025:11:06 20:03:41+00:00",
+          "FilePermissions": "-rw-r--r--",
+          "FileType": "JPEG",
+          "FileTypeExtension": "jpg",
+          "MIMEType": "image/jpeg",
+          "JFIFVersion": 1.01,
+          "ExifByteOrder": "Big-endian (Motorola, MM)",
+          "XResolution": 144,
+          "YResolution": 144,
+          "ResolutionUnit": "inches",
+          "UserComment": "Screenshot",
+          "ExifImageWidth": 594,
+          "ExifImageHeight": 596,
+          "CurrentIPTCDigest": "d41d8cd98f00b204e9800998ecf8427e",
+          "IPTCDigest": "d41d8cd98f00b204e9800998ecf8427e",
+          "ImageWidth": 594,
+          "ImageHeight": 596,
+          "EncodingProcess": "Baseline DCT, Huffman coding",
+          "BitsPerSample": 8,
+          "ColorComponents": 3,
+          "YCbCrSubSampling": "YCbCr4:2:0 (2 2)",
+          "ImageSize": "594x596",
+          "Megapixels": 0.354
+        },
+        "raw_output": "[{\n  \"SourceFile\": \"uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg\",\n  \"ExifToolVersion\": 13.25,\n  \"FileName\": \"497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg\",\n  \"Directory\": \"uploads\",\n  \"FileSize\": \"98 kB\",\n  \"FileModifyDate\": \"2025:11:06 20:03:41+00:00\",\n  \"FileAccessDate\": \"2025:11:06 20:03:41+00:00\",\n  \"FileInodeChangeDate\": \"2025:11:06 20:03:41+00:00\",\n  \"FilePermissions\": \"-rw-r--r--\",\n  \"FileType\": \"JPEG\",\n  \"FileTypeExtension\": \"jpg\",\n  \"MIMEType\": \"image/jpeg\",\n  \"JFIFVersion\": 1.01,\n  \"ExifByteOrder\": \"Big-endian (Motorola, MM)\",\n  \"XResolution\": 144,\n  \"YResolution\": 144,\n  \"ResolutionUnit\": \"inches\",\n  \"UserComment\": \"Screenshot\",\n  \"ExifImageWidth\": 594,\n  \"ExifImageHeight\": 596,\n  \"CurrentIPTCDigest\": \"d41d8cd98f00b204e9800998ecf8427e\",\n  \"IPTCDigest\": \"d41d8cd98f00b204e9800998ecf8427e\",\n  \"ImageWidth\": 594,\n  \"ImageHeight\": 596,\n  \"EncodingProcess\": \"Baseline DCT, Huffman coding\",\n  \"BitsPerSample\": 8,\n  \"ColorComponents\": 3,\n  \"YCbCrSubSampling\": \"YCbCr4:2:0 (2 2)\",\n  \"ImageSize\": \"594x596\",\n  \"Megapixels\": 0.354\n}]\n"
+      }
+    },
+    "color_analysis": {
+      "success": true,
+      "data": {
+        "width": 594,
+        "height": 596,
+        "total_pixels": 354024,
+        "dominant_colors": [
+          {
+            "rgb": [
+              45,
+              51,
+              63
+            ],
+            "hex": "#2d333f",
+            "count": 970,
+            "percentage": 0.27
+          },
+          {
+            "rgb": [
+              46,
+              52,
+              64
+            ],
+            "hex": "#2e3440",
+            "count": 955,
+            "percentage": 0.27
+          },
+          {
+            "rgb": [
+              44,
+              50,
+              62
+            ],
+            "hex": "#2c323e",
+            "count": 925,
+            "percentage": 0.26
+          },
+          {
+            "rgb": [
+              42,
+              48,
+              60
+            ],
+            "hex": "#2a303c",
+            "count": 904,
+            "percentage": 0.26
+          },
+          {
+            "rgb": [
+              47,
+              53,
+              65
+            ],
+            "hex": "#2f3541",
+            "count": 902,
+            "percentage": 0.25
+          },
+          {
+            "rgb": [
+              43,
+              49,
+              61
+            ],
+            "hex": "#2b313d",
+            "count": 899,
+            "percentage": 0.25
+          },
+          {
+            "rgb": [
+              41,
+              48,
+              58
+            ],
+            "hex": "#29303a",
+            "count": 843,
+            "percentage": 0.24
+          },
+          {
+            "rgb": [
+              46,
+              54,
+              65
+            ],
+            "hex": "#2e3641",
+            "count": 814,
+            "percentage": 0.23
+          },
+          {
+            "rgb": [
+              41,
+              47,
+              59
+            ],
+            "hex": "#292f3b",
+            "count": 797,
+            "percentage": 0.23
+          },
+          {
+            "rgb": [
+              45,
+              53,
+              64
+            ],
+            "hex": "#2d3540",
+            "count": 795,
+            "percentage": 0.22
+          }
+        ],
+        "unique_colors": 31631,
+        "color_diversity": 0.08934704991751971,
+        "histograms": {
+          "R": "histogram_R.png",
+          "G": "histogram_G.png",
+          "B": "histogram_B.png"
+        }
+      }
+    },
+    "lsb": {
+      "success": true,
+      "data": {
+        "width": 594,
+        "height": 596,
+        "mode": "RGB",
+        "bit_planes": [
+          {
+            "channel": "R",
+            "bit": 0,
+            "filename": "lsb_R0.png",
+            "filename_gray": "lsb_R0_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 1,
+            "filename": "lsb_R1.png",
+            "filename_gray": "lsb_R1_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 2,
+            "filename": "lsb_R2.png",
+            "filename_gray": "lsb_R2_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 3,
+            "filename": "lsb_R3.png",
+            "filename_gray": "lsb_R3_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 4,
+            "filename": "lsb_R4.png",
+            "filename_gray": "lsb_R4_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 5,
+            "filename": "lsb_R5.png",
+            "filename_gray": "lsb_R5_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 6,
+            "filename": "lsb_R6.png",
+            "filename_gray": "lsb_R6_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "R",
+            "bit": 7,
+            "filename": "lsb_R7.png",
+            "filename_gray": "lsb_R7_gray.png",
+            "color": "#ff0000"
+          },
+          {
+            "channel": "G",
+            "bit": 0,
+            "filename": "lsb_G0.png",
+            "filename_gray": "lsb_G0_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 1,
+            "filename": "lsb_G1.png",
+            "filename_gray": "lsb_G1_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 2,
+            "filename": "lsb_G2.png",
+            "filename_gray": "lsb_G2_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 3,
+            "filename": "lsb_G3.png",
+            "filename_gray": "lsb_G3_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 4,
+            "filename": "lsb_G4.png",
+            "filename_gray": "lsb_G4_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 5,
+            "filename": "lsb_G5.png",
+            "filename_gray": "lsb_G5_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 6,
+            "filename": "lsb_G6.png",
+            "filename_gray": "lsb_G6_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "G",
+            "bit": 7,
+            "filename": "lsb_G7.png",
+            "filename_gray": "lsb_G7_gray.png",
+            "color": "#00ff00"
+          },
+          {
+            "channel": "B",
+            "bit": 0,
+            "filename": "lsb_B0.png",
+            "filename_gray": "lsb_B0_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 1,
+            "filename": "lsb_B1.png",
+            "filename_gray": "lsb_B1_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 2,
+            "filename": "lsb_B2.png",
+            "filename_gray": "lsb_B2_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 3,
+            "filename": "lsb_B3.png",
+            "filename_gray": "lsb_B3_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 4,
+            "filename": "lsb_B4.png",
+            "filename_gray": "lsb_B4_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 5,
+            "filename": "lsb_B5.png",
+            "filename_gray": "lsb_B5_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 6,
+            "filename": "lsb_B6.png",
+            "filename_gray": "lsb_B6_gray.png",
+            "color": "#0000ff"
+          },
+          {
+            "channel": "B",
+            "bit": 7,
+            "filename": "lsb_B7.png",
+            "filename_gray": "lsb_B7_gray.png",
+            "color": "#0000ff"
+          }
+        ],
+        "composite_planes": [
+          {
+            "bit": 0,
+            "filename": "lsb_composite_bit0.png"
+          },
+          {
+            "bit": 1,
+            "filename": "lsb_composite_bit1.png"
+          },
+          {
+            "bit": 2,
+            "filename": "lsb_composite_bit2.png"
+          },
+          {
+            "bit": 3,
+            "filename": "lsb_composite_bit3.png"
+          },
+          {
+            "bit": 4,
+            "filename": "lsb_composite_bit4.png"
+          },
+          {
+            "bit": 5,
+            "filename": "lsb_composite_bit5.png"
+          },
+          {
+            "bit": 6,
+            "filename": "lsb_composite_bit6.png"
+          },
+          {
+            "bit": 7,
+            "filename": "lsb_composite_bit7.png"
+          }
+        ]
+      }
+    },
+    "steghide": {
+      "success": true,
+      "data": {
+        "attempts": [
+          {
+            "password": "(empty)",
+            "success": false,
+            "message": "steghide: could not extract any data with that passphrase!\n"
+          },
+          {
+            "password": "password",
+            "success": false,
+            "message": "steghide: could not extract any data with that passphrase!\n"
+          },
+          {
+            "password": "123456",
+            "success": false,
+            "message": "steghide: could not extract any data with that passphrase!\n"
+          },
+          {
+            "password": "admin",
+            "success": false,
+            "message": "steghide: could not extract any data with that passphrase!\n"
+          },
+          {
+            "password": "root",
+            "success": false,
+            "message": "steghide: could not extract any data with that passphrase!\n"
+          }
+        ],
+        "using_custom_passwords": false
+      }
+    },
+    "outguess": {
+      "success": true,
+      "data": {
+        "success": false,
+        "message": "No hidden data found or extraction failed",
+        "stderr": "Unknown data type of uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg\n"
+      }
+    },
+    "zsteg": {
+      "success": true,
+      "data": {
+        "success": true,
+        "findings": [],
+        "raw_output": "[!] #<ZPNG::NotSupported: Unsupported header \"\\xFF\\xD8\\xFF\\xE0\\x00\\x10JF\" in #<File:uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg>>\n"
+      }
+    },
+    "forensics": {
+      "success": true,
+      "data": {
+        "ela_performed": true,
+        "ela_file": "ela_result.png",
+        "compression_level": "Unknown",
+        "double_jpeg": false,
+        "manipulation_likelihood": "Unknown",
+        "findings": [
+          "Low error levels - Likely unmodified or lightly edited",
+          "Note: ELA is most effective on JPEG images",
+          "Bright areas = higher error levels = potential manipulation"
+        ],
+        "max_difference": 10,
+        "quality_estimate": "High (90-100)",
+        "cloning_detected": {
+          "analysis_performed": true,
+          "method": "Basic block matching",
+          "findings": "Advanced cloning detection requires additional libraries"
+        }
+      }
+    },
+    "entropy": {
+      "success": true,
+      "data": {
+        "overall_entropy": 6.4182,
+        "channel_entropy": {
+          "R": 6.2364,
+          "G": 6.2995,
+          "B": 6.3918
+        },
+        "block_entropy": {
+          "average": 4.868281482834184,
+          "min": 3.2877,
+          "max": 6.8452
+        },
+        "suspicious_blocks": [
+          {
+            "x": 272,
+            "y": 16,
+            "entropy": 6.3125,
+            "difference": 1.4442185171658162
+          },
+          {
+            "x": 280,
+            "y": 24,
+            "entropy": 6.095,
+            "difference": 1.226718517165816
+          },
+          {
+            "x": 288,
+            "y": 24,
+            "entropy": 5.9561,
+            "difference": 1.0878185171658163
+          },
+          {
+            "x": 296,
+            "y": 32,
+            "entropy": 6.1305,
+            "difference": 1.2622185171658158
+          },
+          {
+            "x": 488,
+            "y": 32,
+            "entropy": 5.9333,
+            "difference": 1.0650185171658162
+          },
+          {
+            "x": 384,
+            "y": 72,
+            "entropy": 6.0813,
+            "difference": 1.2130185171658159
+          },
+          {
+            "x": 472,
+            "y": 104,
+            "entropy": 6.0026,
+            "difference": 1.1343185171658163
+          },
+          {
+            "x": 272,
+            "y": 168,
+            "entropy": 6.1232,
+            "difference": 1.254918517165816
+          },
+          {
+            "x": 280,
+            "y": 168,
+            "entropy": 6.3281,
+            "difference": 1.4598185171658162
+          },
+          {
+            "x": 256,
+            "y": 176,
+            "entropy": 6.3079,
+            "difference": 1.4396185171658162
+          },
+          {
+            "x": 264,
+            "y": 176,
+            "entropy": 5.9631,
+            "difference": 1.094818517165816
+          },
+          {
+            "x": 272,
+            "y": 176,
+            "entropy": 6.252,
+            "difference": 1.383718517165816
+          },
+          {
+            "x": 280,
+            "y": 176,
+            "entropy": 6.143,
+            "difference": 1.274718517165816
+          },
+          {
+            "x": 248,
+            "y": 184,
+            "entropy": 6.3278,
+            "difference": 1.459518517165816
+          },
+          {
+            "x": 256,
+            "y": 184,
+            "entropy": 6.3694,
+            "difference": 1.501118517165816
+          },
+          {
+            "x": 264,
+            "y": 184,
+            "entropy": 6.5034,
+            "difference": 1.6351185171658162
+          },
+          {
+            "x": 272,
+            "y": 184,
+            "entropy": 6.6718,
+            "difference": 1.8035185171658163
+          },
+          {
+            "x": 280,
+            "y": 184,
+            "entropy": 6.5521,
+            "difference": 1.6838185171658164
+          },
+          {
+            "x": 288,
+            "y": 184,
+            "entropy": 6.1994,
+            "difference": 1.331118517165816
+          },
+          {
+            "x": 240,
+            "y": 192,
+            "entropy": 5.8843,
+            "difference": 1.0160185171658158
+          },
+          {
+            "x": 256,
+            "y": 192,
+            "entropy": 6.0381,
+            "difference": 1.1698185171658162
+          },
+          {
+            "x": 264,
+            "y": 192,
+            "entropy": 6.1883,
+            "difference": 1.320018517165816
+          },
+          {
+            "x": 272,
+            "y": 192,
+            "entropy": 6.2721,
+            "difference": 1.4038185171658162
+          },
+          {
+            "x": 280,
+            "y": 192,
+            "entropy": 6.5647,
+            "difference": 1.6964185171658164
+          },
+          {
+            "x": 288,
+            "y": 192,
+            "entropy": 6.0108,
+            "difference": 1.1425185171658159
+          },
+          {
+            "x": 296,
+            "y": 192,
+            "entropy": 6.1172,
+            "difference": 1.2489185171658166
+          },
+          {
+            "x": 240,
+            "y": 200,
+            "entropy": 6.0927,
+            "difference": 1.224418517165816
+          },
+          {
+            "x": 248,
+            "y": 200,
+            "entropy": 6.14,
+            "difference": 1.2717185171658159
+          },
+          {
+            "x": 264,
+            "y": 200,
+            "entropy": 6.1197,
+            "difference": 1.251418517165816
+          },
+          {
+            "x": 272,
+            "y": 200,
+            "entropy": 5.9076,
+            "difference": 1.0393185171658166
+          },
+          {
+            "x": 280,
+            "y": 200,
+            "entropy": 6.3666,
+            "difference": 1.4983185171658162
+          },
+          {
+            "x": 288,
+            "y": 200,
+            "entropy": 6.1999,
+            "difference": 1.3316185171658166
+          },
+          {
+            "x": 296,
+            "y": 200,
+            "entropy": 5.9861,
+            "difference": 1.1178185171658166
+          },
+          {
+            "x": 240,
+            "y": 208,
+            "entropy": 6.0185,
+            "difference": 1.1502185171658166
+          },
+          {
+            "x": 248,
+            "y": 208,
+            "entropy": 5.9185,
+            "difference": 1.050218517165816
+          },
+          {
+            "x": 264,
+            "y": 208,
+            "entropy": 5.8578,
+            "difference": 0.9895185171658163
+          },
+          {
+            "x": 232,
+            "y": 216,
+            "entropy": 5.9559,
+            "difference": 1.087618517165816
+          },
+          {
+            "x": 240,
+            "y": 216,
+            "entropy": 6.2892,
+            "difference": 1.4209185171658163
+          },
+          {
+            "x": 304,
+            "y": 216,
+            "entropy": 5.9042,
+            "difference": 1.0359185171658165
+          },
+          {
+            "x": 320,
+            "y": 216,
+            "entropy": 5.9078,
+            "difference": 1.0395185171658161
+          },
+          {
+            "x": 0,
+            "y": 224,
+            "entropy": 5.9775,
+            "difference": 1.1092185171658162
+          },
+          {
+            "x": 16,
+            "y": 224,
+            "entropy": 5.9395,
+            "difference": 1.071218517165816
+          },
+          {
+            "x": 232,
+            "y": 224,
+            "entropy": 6.0939,
+            "difference": 1.2256185171658158
+          },
+          {
+            "x": 320,
+            "y": 224,
+            "entropy": 6.0953,
+            "difference": 1.2270185171658161
+          },
+          {
+            "x": 344,
+            "y": 224,
+            "entropy": 6.1395,
+            "difference": 1.2712185171658161
+          },
+          {
+            "x": 328,
+            "y": 232,
+            "entropy": 5.9969,
+            "difference": 1.1286185171658163
+          },
+          {
+            "x": 336,
+            "y": 232,
+            "entropy": 6.2098,
+            "difference": 1.3415185171658166
+          },
+          {
+            "x": 344,
+            "y": 232,
+            "entropy": 6.4109,
+            "difference": 1.542618517165816
+          },
+          {
+            "x": 336,
+            "y": 240,
+            "entropy": 6.5584,
+            "difference": 1.690118517165816
+          },
+          {
+            "x": 344,
+            "y": 240,
+            "entropy": 6.1528,
+            "difference": 1.2845185171658162
+          },
+          {
+            "x": 352,
+            "y": 240,
+            "entropy": 6.0367,
+            "difference": 1.168418517165816
+          },
+          {
+            "x": 264,
+            "y": 248,
+            "entropy": 6.2858,
+            "difference": 1.4175185171658162
+          },
+          {
+            "x": 272,
+            "y": 248,
+            "entropy": 6.7377,
+            "difference": 1.8694185171658164
+          },
+          {
+            "x": 288,
+            "y": 248,
+            "entropy": 6.1215,
+            "difference": 1.2532185171658163
+          },
+          {
+            "x": 296,
+            "y": 248,
+            "entropy": 5.876,
+            "difference": 1.0077185171658165
+          },
+          {
+            "x": 336,
+            "y": 248,
+            "entropy": 6.721,
+            "difference": 1.8527185171658163
+          },
+          {
+            "x": 344,
+            "y": 248,
+            "entropy": 6.0851,
+            "difference": 1.216818517165816
+          },
+          {
+            "x": 352,
+            "y": 248,
+            "entropy": 6.0405,
+            "difference": 1.172218517165816
+          },
+          {
+            "x": 360,
+            "y": 248,
+            "entropy": 6.1133,
+            "difference": 1.245018517165816
+          },
+          {
+            "x": 368,
+            "y": 248,
+            "entropy": 6.0671,
+            "difference": 1.198818517165816
+          },
+          {
+            "x": 264,
+            "y": 256,
+            "entropy": 5.9676,
+            "difference": 1.0993185171658162
+          },
+          {
+            "x": 272,
+            "y": 256,
+            "entropy": 6.5658,
+            "difference": 1.6975185171658165
+          },
+          {
+            "x": 280,
+            "y": 256,
+            "entropy": 6.0436,
+            "difference": 1.1753185171658158
+          },
+          {
+            "x": 288,
+            "y": 256,
+            "entropy": 6.3312,
+            "difference": 1.4629185171658161
+          },
+          {
+            "x": 296,
+            "y": 256,
+            "entropy": 5.9088,
+            "difference": 1.0405185171658164
+          },
+          {
+            "x": 328,
+            "y": 256,
+            "entropy": 6.1771,
+            "difference": 1.3088185171658164
+          },
+          {
+            "x": 336,
+            "y": 256,
+            "entropy": 6.2719,
+            "difference": 1.4036185171658158
+          },
+          {
+            "x": 344,
+            "y": 256,
+            "entropy": 6.2945,
+            "difference": 1.4262185171658164
+          },
+          {
+            "x": 352,
+            "y": 256,
+            "entropy": 6.2312,
+            "difference": 1.3629185171658165
+          },
+          {
+            "x": 360,
+            "y": 256,
+            "entropy": 6.5447,
+            "difference": 1.676418517165816
+          },
+          {
+            "x": 256,
+            "y": 264,
+            "entropy": 6.1048,
+            "difference": 1.2365185171658162
+          },
+          {
+            "x": 264,
+            "y": 264,
+            "entropy": 6.0959,
+            "difference": 1.2276185171658165
+          },
+          {
+            "x": 272,
+            "y": 264,
+            "entropy": 6.4156,
+            "difference": 1.5473185171658166
+          },
+          {
+            "x": 288,
+            "y": 264,
+            "entropy": 5.9395,
+            "difference": 1.071218517165816
+          },
+          {
+            "x": 296,
+            "y": 264,
+            "entropy": 6.057,
+            "difference": 1.1887185171658166
+          },
+          {
+            "x": 304,
+            "y": 264,
+            "entropy": 5.8483,
+            "difference": 0.9800185171658162
+          },
+          {
+            "x": 328,
+            "y": 264,
+            "entropy": 6.4845,
+            "difference": 1.6162185171658159
+          },
+          {
+            "x": 336,
+            "y": 264,
+            "entropy": 6.6961,
+            "difference": 1.8278185171658166
+          },
+          {
+            "x": 352,
+            "y": 264,
+            "entropy": 6.3198,
+            "difference": 1.451518517165816
+          },
+          {
+            "x": 256,
+            "y": 272,
+            "entropy": 6.556,
+            "difference": 1.6877185171658162
+          },
+          {
+            "x": 272,
+            "y": 272,
+            "entropy": 6.4035,
+            "difference": 1.5352185171658164
+          },
+          {
+            "x": 280,
+            "y": 272,
+            "entropy": 5.9674,
+            "difference": 1.0991185171658158
+          },
+          {
+            "x": 296,
+            "y": 272,
+            "entropy": 6.2703,
+            "difference": 1.402018517165816
+          },
+          {
+            "x": 304,
+            "y": 272,
+            "entropy": 6.0389,
+            "difference": 1.170618517165816
+          },
+          {
+            "x": 328,
+            "y": 272,
+            "entropy": 6.4291,
+            "difference": 1.5608185171658162
+          },
+          {
+            "x": 336,
+            "y": 272,
+            "entropy": 6.4831,
+            "difference": 1.6148185171658165
+          },
+          {
+            "x": 352,
+            "y": 272,
+            "entropy": 5.9622,
+            "difference": 1.0939185171658163
+          },
+          {
+            "x": 256,
+            "y": 280,
+            "entropy": 6.4676,
+            "difference": 1.5993185171658162
+          },
+          {
+            "x": 272,
+            "y": 280,
+            "entropy": 6.4819,
+            "difference": 1.6136185171658166
+          },
+          {
+            "x": 280,
+            "y": 280,
+            "entropy": 6.653,
+            "difference": 1.7847185171658158
+          },
+          {
+            "x": 288,
+            "y": 280,
+            "entropy": 5.8648,
+            "difference": 0.996518517165816
+          },
+          {
+            "x": 296,
+            "y": 280,
+            "entropy": 6.0378,
+            "difference": 1.169518517165816
+          },
+          {
+            "x": 328,
+            "y": 280,
+            "entropy": 6.6826,
+            "difference": 1.814318517165816
+          },
+          {
+            "x": 336,
+            "y": 280,
+            "entropy": 6.7454,
+            "difference": 1.8771185171658162
+          },
+          {
+            "x": 352,
+            "y": 280,
+            "entropy": 6.1419,
+            "difference": 1.2736185171658159
+          },
+          {
+            "x": 256,
+            "y": 288,
+            "entropy": 5.9878,
+            "difference": 1.1195185171658162
+          },
+          {
+            "x": 272,
+            "y": 288,
+            "entropy": 6.5415,
+            "difference": 1.6732185171658163
+          },
+          {
+            "x": 280,
+            "y": 288,
+            "entropy": 6.4715,
+            "difference": 1.603218517165816
+          },
+          {
+            "x": 288,
+            "y": 288,
+            "entropy": 6.4795,
+            "difference": 1.611218517165816
+          },
+          {
+            "x": 304,
+            "y": 288,
+            "entropy": 6.0118,
+            "difference": 1.1435185171658162
+          },
+          {
+            "x": 328,
+            "y": 288,
+            "entropy": 6.178,
+            "difference": 1.309718517165816
+          },
+          {
+            "x": 336,
+            "y": 288,
+            "entropy": 6.5462,
+            "difference": 1.677918517165816
+          },
+          {
+            "x": 352,
+            "y": 288,
+            "entropy": 6.1876,
+            "difference": 1.319318517165816
+          },
+          {
+            "x": 256,
+            "y": 296,
+            "entropy": 5.9466,
+            "difference": 1.0783185171658163
+          },
+          {
+            "x": 264,
+            "y": 296,
+            "entropy": 6.0849,
+            "difference": 1.2166185171658164
+          },
+          {
+            "x": 272,
+            "y": 296,
+            "entropy": 6.3365,
+            "difference": 1.4682185171658162
+          },
+          {
+            "x": 280,
+            "y": 296,
+            "entropy": 6.5053,
+            "difference": 1.6370185171658163
+          },
+          {
+            "x": 288,
+            "y": 296,
+            "entropy": 6.7785,
+            "difference": 1.9102185171658164
+          },
+          {
+            "x": 296,
+            "y": 296,
+            "entropy": 5.9226,
+            "difference": 1.0543185171658163
+          },
+          {
+            "x": 304,
+            "y": 296,
+            "entropy": 5.9759,
+            "difference": 1.1076185171658164
+          },
+          {
+            "x": 328,
+            "y": 296,
+            "entropy": 6.473,
+            "difference": 1.604718517165816
+          },
+          {
+            "x": 352,
+            "y": 296,
+            "entropy": 5.8453,
+            "difference": 0.9770185171658161
+          },
+          {
+            "x": 264,
+            "y": 304,
+            "entropy": 6.2421,
+            "difference": 1.373818517165816
+          },
+          {
+            "x": 272,
+            "y": 304,
+            "entropy": 6.6798,
+            "difference": 1.8115185171658164
+          },
+          {
+            "x": 280,
+            "y": 304,
+            "entropy": 6.5633,
+            "difference": 1.695018517165816
+          },
+          {
+            "x": 288,
+            "y": 304,
+            "entropy": 6.59,
+            "difference": 1.721718517165816
+          },
+          {
+            "x": 296,
+            "y": 304,
+            "entropy": 6.4687,
+            "difference": 1.6004185171658163
+          },
+          {
+            "x": 328,
+            "y": 304,
+            "entropy": 6.6004,
+            "difference": 1.7321185171658158
+          },
+          {
+            "x": 368,
+            "y": 304,
+            "entropy": 5.8697,
+            "difference": 1.001418517165816
+          },
+          {
+            "x": 264,
+            "y": 312,
+            "entropy": 6.3547,
+            "difference": 1.4864185171658164
+          },
+          {
+            "x": 272,
+            "y": 312,
+            "entropy": 6.7734,
+            "difference": 1.9051185171658158
+          },
+          {
+            "x": 280,
+            "y": 312,
+            "entropy": 6.539,
+            "difference": 1.6707185171658159
+          },
+          {
+            "x": 288,
+            "y": 312,
+            "entropy": 6.0096,
+            "difference": 1.141318517165816
+          },
+          {
+            "x": 296,
+            "y": 312,
+            "entropy": 5.9014,
+            "difference": 1.033118517165816
+          },
+          {
+            "x": 328,
+            "y": 312,
+            "entropy": 6.2655,
+            "difference": 1.3972185171658165
+          },
+          {
+            "x": 352,
+            "y": 312,
+            "entropy": 6.0005,
+            "difference": 1.132218517165816
+          },
+          {
+            "x": 216,
+            "y": 320,
+            "entropy": 6.0016,
+            "difference": 1.133318517165816
+          },
+          {
+            "x": 224,
+            "y": 320,
+            "entropy": 6.0609,
+            "difference": 1.1926185171658163
+          },
+          {
+            "x": 264,
+            "y": 320,
+            "entropy": 6.0662,
+            "difference": 1.1979185171658164
+          },
+          {
+            "x": 272,
+            "y": 320,
+            "entropy": 6.2435,
+            "difference": 1.3752185171658162
+          },
+          {
+            "x": 280,
+            "y": 320,
+            "entropy": 6.0711,
+            "difference": 1.2028185171658166
+          },
+          {
+            "x": 288,
+            "y": 320,
+            "entropy": 5.9957,
+            "difference": 1.1274185171658164
+          },
+          {
+            "x": 296,
+            "y": 320,
+            "entropy": 6.3961,
+            "difference": 1.5278185171658158
+          },
+          {
+            "x": 328,
+            "y": 320,
+            "entropy": 6.2116,
+            "difference": 1.343318517165816
+          },
+          {
+            "x": 352,
+            "y": 320,
+            "entropy": 5.9243,
+            "difference": 1.0560185171658159
+          },
+          {
+            "x": 368,
+            "y": 320,
+            "entropy": 6.0846,
+            "difference": 1.2163185171658162
+          },
+          {
+            "x": 224,
+            "y": 328,
+            "entropy": 6.143,
+            "difference": 1.274718517165816
+          },
+          {
+            "x": 264,
+            "y": 328,
+            "entropy": 6.0607,
+            "difference": 1.192418517165816
+          },
+          {
+            "x": 272,
+            "y": 328,
+            "entropy": 5.9994,
+            "difference": 1.1311185171658158
+          },
+          {
+            "x": 280,
+            "y": 328,
+            "entropy": 6.038,
+            "difference": 1.1697185171658164
+          },
+          {
+            "x": 288,
+            "y": 328,
+            "entropy": 6.4611,
+            "difference": 1.5928185171658162
+          },
+          {
+            "x": 296,
+            "y": 328,
+            "entropy": 6.2229,
+            "difference": 1.3546185171658163
+          },
+          {
+            "x": 328,
+            "y": 328,
+            "entropy": 6.2218,
+            "difference": 1.3535185171658162
+          },
+          {
+            "x": 352,
+            "y": 328,
+            "entropy": 5.8507,
+            "difference": 0.982418517165816
+          },
+          {
+            "x": 368,
+            "y": 328,
+            "entropy": 5.9163,
+            "difference": 1.0480185171658158
+          },
+          {
+            "x": 272,
+            "y": 336,
+            "entropy": 6.1901,
+            "difference": 1.3218185171658163
+          },
+          {
+            "x": 288,
+            "y": 336,
+            "entropy": 6.4769,
+            "difference": 1.6086185171658158
+          },
+          {
+            "x": 296,
+            "y": 336,
+            "entropy": 6.7338,
+            "difference": 1.8655185171658157
+          },
+          {
+            "x": 320,
+            "y": 336,
+            "entropy": 6.0418,
+            "difference": 1.1735185171658165
+          },
+          {
+            "x": 344,
+            "y": 336,
+            "entropy": 6.2544,
+            "difference": 1.3861185171658166
+          },
+          {
+            "x": 352,
+            "y": 336,
+            "entropy": 6.0372,
+            "difference": 1.1689185171658165
+          },
+          {
+            "x": 264,
+            "y": 344,
+            "entropy": 6.3077,
+            "difference": 1.4394185171658158
+          },
+          {
+            "x": 272,
+            "y": 344,
+            "entropy": 6.2075,
+            "difference": 1.3392185171658157
+          },
+          {
+            "x": 288,
+            "y": 344,
+            "entropy": 6.2599,
+            "difference": 1.3916185171658162
+          },
+          {
+            "x": 296,
+            "y": 344,
+            "entropy": 6.575,
+            "difference": 1.7067185171658164
+          },
+          {
+            "x": 320,
+            "y": 344,
+            "entropy": 6.1823,
+            "difference": 1.3140185171658159
+          },
+          {
+            "x": 344,
+            "y": 344,
+            "entropy": 6.1273,
+            "difference": 1.2590185171658161
+          },
+          {
+            "x": 376,
+            "y": 344,
+            "entropy": 5.8815,
+            "difference": 1.0132185171658161
+          },
+          {
+            "x": 208,
+            "y": 352,
+            "entropy": 5.8492,
+            "difference": 0.9809185171658159
+          },
+          {
+            "x": 264,
+            "y": 352,
+            "entropy": 5.9291,
+            "difference": 1.0608185171658162
+          },
+          {
+            "x": 272,
+            "y": 352,
+            "entropy": 6.2929,
+            "difference": 1.4246185171658166
+          },
+          {
+            "x": 280,
+            "y": 352,
+            "entropy": 5.8603,
+            "difference": 0.9920185171658158
+          },
+          {
+            "x": 288,
+            "y": 352,
+            "entropy": 5.951,
+            "difference": 1.0827185171658158
+          },
+          {
+            "x": 296,
+            "y": 352,
+            "entropy": 6.6204,
+            "difference": 1.7521185171658162
+          },
+          {
+            "x": 304,
+            "y": 352,
+            "entropy": 5.9374,
+            "difference": 1.0691185171658164
+          },
+          {
+            "x": 320,
+            "y": 352,
+            "entropy": 6.1494,
+            "difference": 1.2811185171658162
+          },
+          {
+            "x": 344,
+            "y": 352,
+            "entropy": 6.07,
+            "difference": 1.2017185171658165
+          },
+          {
+            "x": 376,
+            "y": 352,
+            "entropy": 5.8716,
+            "difference": 1.003318517165816
+          },
+          {
+            "x": 168,
+            "y": 360,
+            "entropy": 5.8582,
+            "difference": 0.9899185171658162
+          },
+          {
+            "x": 208,
+            "y": 360,
+            "entropy": 5.9826,
+            "difference": 1.1143185171658159
+          },
+          {
+            "x": 264,
+            "y": 360,
+            "entropy": 6.1786,
+            "difference": 1.3103185171658165
+          },
+          {
+            "x": 272,
+            "y": 360,
+            "entropy": 6.0041,
+            "difference": 1.1358185171658164
+          },
+          {
+            "x": 280,
+            "y": 360,
+            "entropy": 6.0417,
+            "difference": 1.1734185171658158
+          },
+          {
+            "x": 296,
+            "y": 360,
+            "entropy": 6.2841,
+            "difference": 1.4158185171658157
+          },
+          {
+            "x": 304,
+            "y": 360,
+            "entropy": 6.6614,
+            "difference": 1.7931185171658166
+          },
+          {
+            "x": 312,
+            "y": 360,
+            "entropy": 6.4127,
+            "difference": 1.5444185171658162
+          },
+          {
+            "x": 320,
+            "y": 360,
+            "entropy": 6.2865,
+            "difference": 1.4182185171658164
+          },
+          {
+            "x": 336,
+            "y": 360,
+            "entropy": 5.9394,
+            "difference": 1.0711185171658162
+          },
+          {
+            "x": 272,
+            "y": 368,
+            "entropy": 6.1446,
+            "difference": 1.2763185171658158
+          },
+          {
+            "x": 280,
+            "y": 368,
+            "entropy": 6.254,
+            "difference": 1.3857185171658157
+          },
+          {
+            "x": 296,
+            "y": 368,
+            "entropy": 5.9351,
+            "difference": 1.0668185171658164
+          },
+          {
+            "x": 312,
+            "y": 368,
+            "entropy": 6.232,
+            "difference": 1.3637185171658164
+          },
+          {
+            "x": 280,
+            "y": 376,
+            "entropy": 6.0169,
+            "difference": 1.1486185171658159
+          },
+          {
+            "x": 304,
+            "y": 376,
+            "entropy": 6.0248,
+            "difference": 1.156518517165816
+          },
+          {
+            "x": 312,
+            "y": 376,
+            "entropy": 5.8826,
+            "difference": 1.0143185171658162
+          },
+          {
+            "x": 280,
+            "y": 384,
+            "entropy": 6.0752,
+            "difference": 1.2069185171658159
+          },
+          {
+            "x": 200,
+            "y": 392,
+            "entropy": 6.1056,
+            "difference": 1.237318517165816
+          },
+          {
+            "x": 208,
+            "y": 392,
+            "entropy": 6.2098,
+            "difference": 1.3415185171658166
+          },
+          {
+            "x": 280,
+            "y": 392,
+            "entropy": 5.9422,
+            "difference": 1.0739185171658159
+          },
+          {
+            "x": 336,
+            "y": 392,
+            "entropy": 5.8635,
+            "difference": 0.9952185171658163
+          },
+          {
+            "x": 192,
+            "y": 400,
+            "entropy": 6.5229,
+            "difference": 1.654618517165816
+          },
+          {
+            "x": 200,
+            "y": 400,
+            "entropy": 6.5864,
+            "difference": 1.7181185171658164
+          },
+          {
+            "x": 208,
+            "y": 400,
+            "entropy": 5.9892,
+            "difference": 1.1209185171658165
+          },
+          {
+            "x": 336,
+            "y": 400,
+            "entropy": 5.9191,
+            "difference": 1.0508185171658164
+          },
+          {
+            "x": 184,
+            "y": 408,
+            "entropy": 6.26,
+            "difference": 1.391718517165816
+          },
+          {
+            "x": 192,
+            "y": 408,
+            "entropy": 6.416,
+            "difference": 1.5477185171658165
+          },
+          {
+            "x": 200,
+            "y": 408,
+            "entropy": 6.543,
+            "difference": 1.6747185171658163
+          },
+          {
+            "x": 208,
+            "y": 408,
+            "entropy": 6.056,
+            "difference": 1.1877185171658162
+          },
+          {
+            "x": 184,
+            "y": 416,
+            "entropy": 6.6093,
+            "difference": 1.7410185171658163
+          },
+          {
+            "x": 192,
+            "y": 416,
+            "entropy": 6.4909,
+            "difference": 1.622618517165816
+          },
+          {
+            "x": 200,
+            "y": 416,
+            "entropy": 6.6811,
+            "difference": 1.812818517165816
+          },
+          {
+            "x": 208,
+            "y": 416,
+            "entropy": 6.273,
+            "difference": 1.4047185171658159
+          },
+          {
+            "x": 184,
+            "y": 424,
+            "entropy": 6.5384,
+            "difference": 1.6701185171658164
+          },
+          {
+            "x": 192,
+            "y": 424,
+            "entropy": 6.8452,
+            "difference": 1.9769185171658163
+          },
+          {
+            "x": 200,
+            "y": 424,
+            "entropy": 6.7695,
+            "difference": 1.901218517165816
+          },
+          {
+            "x": 208,
+            "y": 424,
+            "entropy": 6.354,
+            "difference": 1.4857185171658163
+          },
+          {
+            "x": 184,
+            "y": 432,
+            "entropy": 5.9293,
+            "difference": 1.0610185171658157
+          },
+          {
+            "x": 192,
+            "y": 432,
+            "entropy": 6.584,
+            "difference": 1.7157185171658158
+          },
+          {
+            "x": 200,
+            "y": 432,
+            "entropy": 6.5097,
+            "difference": 1.6414185171658158
+          },
+          {
+            "x": 208,
+            "y": 432,
+            "entropy": 6.421,
+            "difference": 1.5527185171658164
+          },
+          {
+            "x": 216,
+            "y": 432,
+            "entropy": 5.9784,
+            "difference": 1.1101185171658159
+          },
+          {
+            "x": 192,
+            "y": 440,
+            "entropy": 6.22,
+            "difference": 1.351718517165816
+          },
+          {
+            "x": 200,
+            "y": 440,
+            "entropy": 6.2561,
+            "difference": 1.3878185171658162
+          },
+          {
+            "x": 184,
+            "y": 448,
+            "entropy": 6.1345,
+            "difference": 1.2662185171658162
+          },
+          {
+            "x": 192,
+            "y": 448,
+            "entropy": 6.3575,
+            "difference": 1.489218517165816
+          },
+          {
+            "x": 200,
+            "y": 448,
+            "entropy": 6.3516,
+            "difference": 1.4833185171658165
+          },
+          {
+            "x": 208,
+            "y": 448,
+            "entropy": 6.0418,
+            "difference": 1.1735185171658165
+          },
+          {
+            "x": 184,
+            "y": 456,
+            "entropy": 5.9747,
+            "difference": 1.1064185171658165
+          },
+          {
+            "x": 192,
+            "y": 456,
+            "entropy": 6.1471,
+            "difference": 1.2788185171658162
+          },
+          {
+            "x": 200,
+            "y": 456,
+            "entropy": 6.1005,
+            "difference": 1.2322185171658164
+          },
+          {
+            "x": 208,
+            "y": 456,
+            "entropy": 5.922,
+            "difference": 1.0537185171658159
+          },
+          {
+            "x": 328,
+            "y": 456,
+            "entropy": 6.0273,
+            "difference": 1.1590185171658165
+          },
+          {
+            "x": 328,
+            "y": 464,
+            "entropy": 6.2297,
+            "difference": 1.3614185171658164
+          },
+          {
+            "x": 232,
+            "y": 472,
+            "entropy": 5.8615,
+            "difference": 0.9932185171658166
+          },
+          {
+            "x": 320,
+            "y": 472,
+            "entropy": 6.4108,
+            "difference": 1.5425185171658162
+          },
+          {
+            "x": 184,
+            "y": 480,
+            "entropy": 6.0776,
+            "difference": 1.2093185171658165
+          },
+          {
+            "x": 264,
+            "y": 480,
+            "entropy": 5.8491,
+            "difference": 0.9808185171658161
+          },
+          {
+            "x": 312,
+            "y": 480,
+            "entropy": 6.3743,
+            "difference": 1.506018517165816
+          },
+          {
+            "x": 320,
+            "y": 480,
+            "entropy": 5.8708,
+            "difference": 1.0025185171658162
+          },
+          {
+            "x": 192,
+            "y": 488,
+            "entropy": 6.1338,
+            "difference": 1.265518517165816
+          },
+          {
+            "x": 304,
+            "y": 488,
+            "entropy": 6.121,
+            "difference": 1.2527185171658166
+          },
+          {
+            "x": 312,
+            "y": 488,
+            "entropy": 6.3789,
+            "difference": 1.510618517165816
+          },
+          {
+            "x": 256,
+            "y": 496,
+            "entropy": 5.9088,
+            "difference": 1.0405185171658164
+          },
+          {
+            "x": 288,
+            "y": 496,
+            "entropy": 6.4661,
+            "difference": 1.5978185171658161
+          },
+          {
+            "x": 296,
+            "y": 496,
+            "entropy": 6.1593,
+            "difference": 1.2910185171658162
+          },
+          {
+            "x": 304,
+            "y": 496,
+            "entropy": 6.5143,
+            "difference": 1.6460185171658166
+          },
+          {
+            "x": 200,
+            "y": 504,
+            "entropy": 6.2033,
+            "difference": 1.3350185171658158
+          },
+          {
+            "x": 232,
+            "y": 504,
+            "entropy": 6.1092,
+            "difference": 1.2409185171658166
+          },
+          {
+            "x": 240,
+            "y": 504,
+            "entropy": 6.164,
+            "difference": 1.2957185171658159
+          },
+          {
+            "x": 280,
+            "y": 504,
+            "entropy": 6.5027,
+            "difference": 1.634418517165816
+          },
+          {
+            "x": 304,
+            "y": 504,
+            "entropy": 6.2013,
+            "difference": 1.333018517165816
+          },
+          {
+            "x": 192,
+            "y": 512,
+            "entropy": 5.9416,
+            "difference": 1.0733185171658164
+          },
+          {
+            "x": 200,
+            "y": 512,
+            "entropy": 6.1143,
+            "difference": 1.2460185171658162
+          },
+          {
+            "x": 208,
+            "y": 512,
+            "entropy": 6.1326,
+            "difference": 1.2643185171658162
+          },
+          {
+            "x": 224,
+            "y": 512,
+            "entropy": 6.3249,
+            "difference": 1.4566185171658166
+          },
+          {
+            "x": 232,
+            "y": 512,
+            "entropy": 6.0947,
+            "difference": 1.2264185171658157
+          },
+          {
+            "x": 280,
+            "y": 512,
+            "entropy": 6.4988,
+            "difference": 1.6305185171658163
+          },
+          {
+            "x": 288,
+            "y": 512,
+            "entropy": 6.426,
+            "difference": 1.5577185171658163
+          },
+          {
+            "x": 296,
+            "y": 512,
+            "entropy": 6.4928,
+            "difference": 1.624518517165816
+          },
+          {
+            "x": 192,
+            "y": 520,
+            "entropy": 5.8836,
+            "difference": 1.0153185171658166
+          },
+          {
+            "x": 200,
+            "y": 520,
+            "entropy": 6.0916,
+            "difference": 1.2233185171658159
+          },
+          {
+            "x": 208,
+            "y": 520,
+            "entropy": 6.0531,
+            "difference": 1.1848185171658159
+          },
+          {
+            "x": 280,
+            "y": 520,
+            "entropy": 6.2734,
+            "difference": 1.4051185171658158
+          },
+          {
+            "x": 288,
+            "y": 520,
+            "entropy": 6.4799,
+            "difference": 1.611618517165816
+          },
+          {
+            "x": 296,
+            "y": 520,
+            "entropy": 6.1079,
+            "difference": 1.239618517165816
+          },
+          {
+            "x": 192,
+            "y": 528,
+            "entropy": 6.1864,
+            "difference": 1.318118517165816
+          },
+          {
+            "x": 200,
+            "y": 528,
+            "entropy": 6.345,
+            "difference": 1.476718517165816
+          },
+          {
+            "x": 232,
+            "y": 528,
+            "entropy": 5.8636,
+            "difference": 0.9953185171658161
+          },
+          {
+            "x": 304,
+            "y": 528,
+            "entropy": 6.0032,
+            "difference": 1.1349185171658158
+          },
+          {
+            "x": 128,
+            "y": 536,
+            "entropy": 5.8583,
+            "difference": 0.990018517165816
+          },
+          {
+            "x": 192,
+            "y": 536,
+            "entropy": 6.5063,
+            "difference": 1.6380185171658166
+          },
+          {
+            "x": 200,
+            "y": 536,
+            "entropy": 6.2045,
+            "difference": 1.3362185171658165
+          },
+          {
+            "x": 248,
+            "y": 536,
+            "entropy": 6.3406,
+            "difference": 1.4723185171658164
+          },
+          {
+            "x": 256,
+            "y": 536,
+            "entropy": 6.0768,
+            "difference": 1.2085185171658166
+          },
+          {
+            "x": 264,
+            "y": 536,
+            "entropy": 5.9162,
+            "difference": 1.047918517165816
+          },
+          {
+            "x": 272,
+            "y": 536,
+            "entropy": 5.9737,
+            "difference": 1.1054185171658162
+          },
+          {
+            "x": 280,
+            "y": 536,
+            "entropy": 6.0252,
+            "difference": 1.156918517165816
+          },
+          {
+            "x": 288,
+            "y": 536,
+            "entropy": 6.4953,
+            "difference": 1.6270185171658165
+          },
+          {
+            "x": 296,
+            "y": 536,
+            "entropy": 6.2685,
+            "difference": 1.4002185171658166
+          },
+          {
+            "x": 120,
+            "y": 544,
+            "entropy": 6.1659,
+            "difference": 1.2976185171658159
+          },
+          {
+            "x": 128,
+            "y": 544,
+            "entropy": 6.0792,
+            "difference": 1.2109185171658163
+          },
+          {
+            "x": 184,
+            "y": 544,
+            "entropy": 5.9498,
+            "difference": 1.081518517165816
+          },
+          {
+            "x": 192,
+            "y": 544,
+            "entropy": 6.2021,
+            "difference": 1.333818517165816
+          },
+          {
+            "x": 200,
+            "y": 544,
+            "entropy": 6.2454,
+            "difference": 1.3771185171658162
+          },
+          {
+            "x": 256,
+            "y": 544,
+            "entropy": 5.8779,
+            "difference": 1.0096185171658165
+          },
+          {
+            "x": 120,
+            "y": 552,
+            "entropy": 5.8845,
+            "difference": 1.0162185171658162
+          },
+          {
+            "x": 128,
+            "y": 552,
+            "entropy": 6.1336,
+            "difference": 1.2653185171658166
+          },
+          {
+            "x": 136,
+            "y": 552,
+            "entropy": 6.2247,
+            "difference": 1.3564185171658165
+          },
+          {
+            "x": 184,
+            "y": 552,
+            "entropy": 6.4778,
+            "difference": 1.6095185171658164
+          },
+          {
+            "x": 192,
+            "y": 552,
+            "entropy": 6.1767,
+            "difference": 1.3084185171658165
+          },
+          {
+            "x": 200,
+            "y": 552,
+            "entropy": 6.2252,
+            "difference": 1.3569185171658162
+          },
+          {
+            "x": 256,
+            "y": 552,
+            "entropy": 6.2237,
+            "difference": 1.3554185171658162
+          },
+          {
+            "x": 136,
+            "y": 560,
+            "entropy": 6.0514,
+            "difference": 1.1831185171658163
+          },
+          {
+            "x": 184,
+            "y": 560,
+            "entropy": 6.6347,
+            "difference": 1.7664185171658158
+          },
+          {
+            "x": 192,
+            "y": 560,
+            "entropy": 6.2651,
+            "difference": 1.3968185171658165
+          },
+          {
+            "x": 200,
+            "y": 560,
+            "entropy": 6.0673,
+            "difference": 1.1990185171658165
+          },
+          {
+            "x": 256,
+            "y": 560,
+            "entropy": 5.9037,
+            "difference": 1.035418517165816
+          },
+          {
+            "x": 136,
+            "y": 568,
+            "entropy": 5.9446,
+            "difference": 1.0763185171658165
+          },
+          {
+            "x": 176,
+            "y": 568,
+            "entropy": 5.9428,
+            "difference": 1.0745185171658163
+          },
+          {
+            "x": 184,
+            "y": 568,
+            "entropy": 6.4416,
+            "difference": 1.5733185171658164
+          },
+          {
+            "x": 192,
+            "y": 568,
+            "entropy": 6.2312,
+            "difference": 1.3629185171658165
+          },
+          {
+            "x": 160,
+            "y": 576,
+            "entropy": 6.1727,
+            "difference": 1.304418517165816
+          },
+          {
+            "x": 168,
+            "y": 576,
+            "entropy": 6.3302,
+            "difference": 1.4619185171658158
+          },
+          {
+            "x": 184,
+            "y": 576,
+            "entropy": 5.8619,
+            "difference": 0.9936185171658165
+          },
+          {
+            "x": 192,
+            "y": 576,
+            "entropy": 6.0354,
+            "difference": 1.1671185171658163
+          },
+          {
+            "x": 152,
+            "y": 584,
+            "entropy": 6.6186,
+            "difference": 1.750318517165816
+          },
+          {
+            "x": 160,
+            "y": 584,
+            "entropy": 6.0894,
+            "difference": 1.2211185171658165
+          },
+          {
+            "x": 168,
+            "y": 584,
+            "entropy": 6.2356,
+            "difference": 1.367318517165816
+          },
+          {
+            "x": 176,
+            "y": 584,
+            "entropy": 6.0892,
+            "difference": 1.2209185171658161
+          }
+        ],
+        "entropy_map_file": "entropy_map.png",
+        "interpretation": [
+          "Normal entropy - Typical for natural images",
+          "Found 299 blocks with unusually high entropy",
+          "These areas may contain hidden data or compression artifacts"
+        ]
+      }
+    },
+    "strings": {
+      "success": true,
+      "data": {
+        "success": true,
+        "count": 31,
+        "strings": [
+          "Screenshot",
+          "8Photoshop 3.0",
+          "%&'()*456789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz",
+          "&'()*56789:CDEFGHIJSTUVWXYZcdefghijstuvwxyz",
+          ",':ic+[6",
+          "$/ \\6F2=k",
+          ">&I4,M7&",
+          "\"34?/~{V",
+          "ma&@^2=>",
+          "Mewoqi$w",
+          "ODKY1nW;",
+          ",20=kb=2-n",
+          "g+'EoaMbX",
+          "{WD(Ina+",
+          "}k:;mOWd",
+          "l==.8=np",
+          "2^[E(~$-",
+          "im\"S$o\t;",
+          "fTY\"\\y|TOvd",
+          "8'EJWg16",
+          ")$F}MAu3\\[",
+          "{WUKXTks\\",
+          "cPq,l?vEi%",
+          "o.N0=My.",
+          "2==3_9|Z",
+          "TVP\\I{+?",
+          ",-Y`\\(-&",
+          "T5M[MXvJ6",
+          "uSdR^DTOo",
+          "o[kllSg",
+          "A/f~=)>r"
+        ],
+        "output_file": "strings.txt"
+      }
+    },
+    "file_carving": {
+      "success": true,
+      "data": {
+        "binwalk": {
+          "success": false,
+          "output": "",
+          "extracted_files": []
+        },
+        "foremost": {
+          "success": true,
+          "extracted_files": [
+            "foremost/jpg/00000000.jpg"
+          ]
+        }
+      }
+    }
+  }
+}

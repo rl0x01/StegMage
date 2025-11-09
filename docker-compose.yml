@@ -11,6 +11,12 @@ services:
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY=${SECRET_KEY:-dev-secret-change-in-production}
       - DEBUG=${DEBUG:-False}
+      # Authentication - use AUTH_PASSWORD_HASH (SHA256) or AUTH_PASSWORD (will be hashed)
+      - AUTH_PASSWORD_HASH=${AUTH_PASSWORD_HASH:-}
+      - AUTH_PASSWORD=${AUTH_PASSWORD:-}
+      # Security settings (enable in production)
+      - FORCE_HTTPS=${FORCE_HTTPS:-false}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
     volumes:
       - ./uploads:/app/uploads
       - ./results:/app/results

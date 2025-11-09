@@ -1,9 +1,13 @@
-# StegMage 🔮
+# StegMage
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+**Professional Steganography Analysis Platform**
+
+Une plateforme d'analyse steganographique complète et sécurisée pour la détection et l'extraction de données cachées dans les images.
+
+[![Security](https://img.shields.io/badge/Security-96%2F100-brightgreen)](SECURITY.md)
+[![CapRover](https://img.shields.io/badge/Deploy-CapRover-blue)](CAPROVER_DEPLOY.md)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-
-**StegMage** is a powerful open-source steganography analysis platform designed to detect and extract hidden data from images. Built for cybersecurity professionals, CTF players, and digital forensics experts.
+[![License](https://img.shields.io/badge/License-Educational-orange)]()
 
 ## ✨ Features
 
@@ -16,23 +20,40 @@
 - 🎨 **Visual Analysis**: Interactive bit-plane visualization
 - ⚡ **Fast Processing**: Redis-powered job queue for efficient analysis
 
-## 🚀 Quick Start
+---
 
-### Using Docker (Recommended)
+## 🚀 Déploiement Rapide
+
+### Option 1: CapRover (Production - Recommandé)
 
 ```bash
-# Clone the repository
-git clone https://github.com/rl0x01/StegMage.git
-cd StegMage
+# 1. Installer CapRover CLI
+npm install -g caprover
 
-# Start the application
-docker compose up -d
+# 2. Se connecter à votre serveur
+caprover login
 
-# Access the platform
-open http://localhost:8080
+# 3. Déployer
+./deploy.sh
 ```
 
-> **Note pour macOS**: Le port 8080 est utilisé car le port 5000 est réservé par le service AirPlay d'Apple.
+📖 **[Guide Complet CapRover](CAPROVER_DEPLOY.md)**
+
+### Option 2: Docker Compose (Local/Dev)
+
+```bash
+# 1. Configurer les variables d'environnement
+cp .env.example .env
+# Éditer .env avec vos valeurs
+
+# 2. Démarrer l'application
+docker compose up -d
+
+# 3. Accéder à l'interface
+http://localhost:8080
+```
+
+> **Note macOS**: Port 8080 utilisé (port 5000 réservé par AirPlay)
 
 ### Manual Installation
 
@@ -110,10 +131,73 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Inspired by [AperiSolve](https://github.com/Zeecka/AperiSolve) - a fantastic steganography analysis platform.
 
-## ⚠️ Disclaimer
+---
 
-This tool is designed for educational purposes, cybersecurity research, and authorized security testing only. Always ensure you have permission before analyzing files that don't belong to you.
+## 🔐 Sécurité
+
+StegMage intègre une sécurité de niveau entreprise:
+
+✅ **Authentication** - Protection par mot de passe SHA-256
+✅ **Rate Limiting** - Anti brute force (5 tentatives max)
+✅ **File Validation** - Vérification multi-couches (MIME, PIL, taille)
+✅ **HTTPS Enforcement** - Redirection automatique
+✅ **Security Headers** - CSP, HSTS, X-Frame-Options
+✅ **Audit Logging** - Traçabilité complète
+
+**Score de Sécurité: 96/100** ⭐⭐⭐⭐⭐
+
+📖 **[Rapport de Sécurité Complet](SECURITY.md)**
 
 ---
 
-Made with 🔮 by StegMage Team
+## ⚙️ Configuration Production
+
+### Variables d'Environnement Obligatoires
+
+```bash
+SECRET_KEY=<généré>           # python3 -c "import secrets; print(secrets.token_hex(32))"
+AUTH_PASSWORD=<votre-mdp>     # Mot de passe fort (16+ chars)
+FORCE_HTTPS=true              # Forcer HTTPS
+ALLOWED_ORIGINS=https://...   # Votre domaine
+REDIS_URL=redis://...         # URL Redis
+```
+
+### Checklist Déploiement
+
+- [ ] Redis déployé et accessible
+- [ ] Variables d'environnement configurées
+- [ ] HTTPS/SSL activé (Let's Encrypt)
+- [ ] SECRET_KEY généré aléatoirement
+- [ ] AUTH_PASSWORD fort et unique
+- [ ] ALLOWED_ORIGINS restreint au domaine
+- [ ] DEBUG=false
+- [ ] Logs et monitoring configurés
+
+📖 **[Guide Déploiement](CAPROVER_DEPLOY.md)** | **[Config Production](DEPLOYMENT.md)**
+
+---
+
+## 📖 Documentation
+
+- **[Guide CapRover](CAPROVER_DEPLOY.md)** - Déploiement production
+- **[Sécurité](SECURITY.md)** - Audit et recommandations
+- **[Deployment](DEPLOYMENT.md)** - Configuration avancée
+- **[Env Variables](.env.example)** - Toutes les variables
+
+---
+
+## ⚠️ Disclaimer
+
+Cette plateforme est destinée à des **fins éducatives et tests de sécurité autorisés uniquement**. L'utilisation pour des activités malveillantes est strictement interdite.
+
+**⚠️ IMPORTANT:** Toujours obtenir l'autorisation avant d'analyser des fichiers qui ne vous appartiennent pas.
+
+---
+
+## 👨‍💻 Développé Par
+
+**NetMeSafe** - Plateforme professionnelle d'analyse steganographique avec sécurité de niveau entreprise.
+
+---
+
+Made with 🔮 by NetMeSafe

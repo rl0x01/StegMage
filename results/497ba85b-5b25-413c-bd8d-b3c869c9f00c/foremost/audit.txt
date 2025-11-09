@@ -1,0 +1,23 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Thu Nov  6 20:03:45 2025
+Invocation: foremost -o results/497ba85b-5b25-413c-bd8d-b3c869c9f00c/foremost -i uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg 
+Output directory: /app/results/497ba85b-5b25-413c-bd8d-b3c869c9f00c/foremost
+Configuration file: /etc/foremost.conf
+------------------------------------------------------------------
+File: uploads/497ba85b-5b25-413c-bd8d-b3c869c9f00c_SCR-20250717-mlok.jpeg
+Start: Thu Nov  6 20:03:45 2025
+Length: 95 KB (98070 bytes)
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+0:	00000000.jpg 	      95 KB 	          0 	 
+Finish: Thu Nov  6 20:03:45 2025
+
+1 FILES EXTRACTED
+	
+jpg:= 1
+------------------------------------------------------------------
+
+Foremost finished at Thu Nov  6 20:03:45 2025
